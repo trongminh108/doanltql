@@ -1,0 +1,16 @@
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\BUS.dll.config
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\BUS.dll
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\BUS.pdb
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DAO.dll
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DTO.dll
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DAO.pdb
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DAO.dll.config
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DTO.pdb
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\bin\Debug\DTO.dll.config
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.Properties.Resources.resources
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.csproj.GenerateResource.cache
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.csproj.CopyComplete
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.dll
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\BUS\obj\Debug\BUS.pdb
