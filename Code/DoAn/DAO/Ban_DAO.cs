@@ -41,5 +41,33 @@ namespace DAO
             DataProvider.DongKetNoi(conn);
             return kq;
         }
+
+        public static List<Ban_DTO> LayBanCoNguoiKhongCoHD()
+        {
+            string sTruyVan = string.Format(
+                @"SELECT *
+                FROM Ban b
+                WHERE b.tinhtrang=1 AND b.id NOT IN (
+	                SELECT hd.idBan
+	                FROM HoaDon hd	
+                )"
+            );
+            SqlConnection conn = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            if (dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            List<Ban_DTO> lst = new List<Ban_DTO>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Ban_DTO ban = new Ban_DTO();
+                ban.Id = int.Parse(dt.Rows[i]["id"].ToString());
+                ban.Status = bool.Parse(dt.Rows[i]["tinhtrang"] + "");
+                lst.Add(ban);
+            }
+            DataProvider.DongKetNoi(conn);
+            return lst;
+        }
     }
 }

@@ -18,10 +18,14 @@ namespace GUI
         public static int tableHeight = 100;
         int idBanChuyen = -1;
         List<Ban_DTO> lstBan;
+        int currentID = -1;
+        bool duocChuyen = false;
         public Form_ChuyenBan(int id)
         {
             InitializeComponent();
             idBanChuyen = id;
+            lblChuyenBan.Text = "Chọn bàn để chuyển bàn " + idBanChuyen;
+            btnChuyen.Enabled = false;
         }
 
         public void HienThiBan()
@@ -54,14 +58,18 @@ namespace GUI
                 if (((control as Button).Tag as Ban_DTO).Status)
                     control.BackColor = Color.Aqua;
             }
-            int currentID = ((sender as Button).Tag as Ban_DTO).Id;
-            if (currentID != idBanChuyen)
+            currentID = ((sender as Button).Tag as Ban_DTO).Id;
+            if (currentID != idBanChuyen && !lstBan[currentID-1].Status)
             {
                 (sender as Button).BackColor = Color.Red;
                 lblChuyenBan.Text = "Chuyển từ bàn " + idBanChuyen + " đến bàn " + currentID;
+                btnChuyen.Enabled = true;
             }
             else
+            {
                 lblChuyenBan.Text = "";
+                btnChuyen.Enabled = false;
+            }
         }
 
         private void Form_ChuyenBan_Load(object sender, EventArgs e)
@@ -71,6 +79,17 @@ namespace GUI
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void btnChuyen_Click(object sender, EventArgs e)
+        {
+            int idHD = HoaDon_BUS.LayIDHoaDon(idBanChuyen);
+            HoaDon_BUS.ChuyenBan(idHD, currentID);
+            Ban_BUS.ThanhToanBan(idBanChuyen, 0);
+            Ban_BUS.ThanhToanBan(currentID, 1);
+            MessageBox.Show("Đã chuyển từ bàn " + idBanChuyen + " đến bàn " + currentID, "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }

@@ -63,6 +63,7 @@
             this.btnChuyen.TabIndex = 15;
             this.btnChuyen.Text = "Chuyển";
             this.btnChuyen.UseVisualStyleBackColor = true;
+            this.btnChuyen.Click += new System.EventHandler(this.btnChuyen_Click);
             // 
             // btnHuy
             // 
@@ -82,7 +83,6 @@
             this.lblChuyenBan.Name = "lblChuyenBan";
             this.lblChuyenBan.Size = new System.Drawing.Size(560, 25);
             this.lblChuyenBan.TabIndex = 17;
-            this.lblChuyenBan.Text = "Chuyển từ bàn 1 sang bàn 2";
             this.lblChuyenBan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form_ChuyenBan

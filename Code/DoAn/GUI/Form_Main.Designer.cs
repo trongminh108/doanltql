@@ -31,7 +31,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.fpnDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelButton = new System.Windows.Forms.Panel();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnGopBan = new System.Windows.Forms.Button();
             this.btnChuyenBan = new System.Windows.Forms.Button();
@@ -69,7 +69,7 @@
             this.lblHello = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabHome.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong)).BeginInit();
             this.tabCTHD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong2)).BeginInit();
@@ -85,21 +85,21 @@
             this.tabControl.Controls.Add(this.tabPageThongKe);
             this.tabControl.Controls.Add(this.tabPageQuanLy);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl.Location = new System.Drawing.Point(13, 51);
+            this.tabControl.Location = new System.Drawing.Point(13, 37);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(775, 498);
+            this.tabControl.Size = new System.Drawing.Size(786, 512);
             this.tabControl.TabIndex = 8;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabHome
             // 
             this.tabHome.Controls.Add(this.fpnDanhSachBan);
-            this.tabHome.Controls.Add(this.panel1);
+            this.tabHome.Controls.Add(this.panelButton);
             this.tabHome.Location = new System.Drawing.Point(4, 25);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHome.Size = new System.Drawing.Size(767, 469);
+            this.tabHome.Size = new System.Drawing.Size(778, 483);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Trang chủ";
             this.tabHome.UseVisualStyleBackColor = true;
@@ -114,24 +114,24 @@
             this.fpnDanhSachBan.Size = new System.Drawing.Size(387, 466);
             this.fpnDanhSachBan.TabIndex = 2;
             // 
-            // panel1
+            // panelButton
             // 
-            this.panel1.Controls.Add(this.btnThoat);
-            this.panel1.Controls.Add(this.btnGopBan);
-            this.panel1.Controls.Add(this.btnChuyenBan);
-            this.panel1.Controls.Add(this.lblHomeGia);
-            this.panel1.Controls.Add(this.lblIdBan);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.btnThem);
-            this.panel1.Controls.Add(this.btnHoaDon);
-            this.panel1.Controls.Add(this.nudSoLuong);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.cbDoUong);
-            this.panel1.Location = new System.Drawing.Point(393, 6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(368, 460);
-            this.panel1.TabIndex = 1;
+            this.panelButton.Controls.Add(this.btnThoat);
+            this.panelButton.Controls.Add(this.btnGopBan);
+            this.panelButton.Controls.Add(this.btnChuyenBan);
+            this.panelButton.Controls.Add(this.lblHomeGia);
+            this.panelButton.Controls.Add(this.lblIdBan);
+            this.panelButton.Controls.Add(this.label5);
+            this.panelButton.Controls.Add(this.btnThem);
+            this.panelButton.Controls.Add(this.btnHoaDon);
+            this.panelButton.Controls.Add(this.nudSoLuong);
+            this.panelButton.Controls.Add(this.label2);
+            this.panelButton.Controls.Add(this.label1);
+            this.panelButton.Controls.Add(this.cbDoUong);
+            this.panelButton.Location = new System.Drawing.Point(393, 6);
+            this.panelButton.Name = "panelButton";
+            this.panelButton.Size = new System.Drawing.Size(368, 460);
+            this.panelButton.TabIndex = 1;
             // 
             // btnThoat
             // 
@@ -153,6 +153,7 @@
             this.btnGopBan.TabIndex = 21;
             this.btnGopBan.Text = "Gộp bàn";
             this.btnGopBan.UseVisualStyleBackColor = true;
+            this.btnGopBan.Click += new System.EventHandler(this.btnGopBan_Click);
             // 
             // btnChuyenBan
             // 
@@ -285,7 +286,7 @@
             this.tabCTHD.Location = new System.Drawing.Point(4, 25);
             this.tabCTHD.Name = "tabCTHD";
             this.tabCTHD.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCTHD.Size = new System.Drawing.Size(767, 469);
+            this.tabCTHD.Size = new System.Drawing.Size(778, 483);
             this.tabCTHD.TabIndex = 1;
             this.tabCTHD.Text = "Chi tiết hóa đơn";
             this.tabCTHD.UseVisualStyleBackColor = true;
@@ -438,7 +439,7 @@
             this.tabPageBaoCao.Location = new System.Drawing.Point(4, 25);
             this.tabPageBaoCao.Name = "tabPageBaoCao";
             this.tabPageBaoCao.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBaoCao.Size = new System.Drawing.Size(767, 469);
+            this.tabPageBaoCao.Size = new System.Drawing.Size(778, 483);
             this.tabPageBaoCao.TabIndex = 2;
             this.tabPageBaoCao.Text = "Báo cáo";
             this.tabPageBaoCao.UseVisualStyleBackColor = true;
@@ -448,7 +449,7 @@
             this.tabPageThongKe.Location = new System.Drawing.Point(4, 25);
             this.tabPageThongKe.Name = "tabPageThongKe";
             this.tabPageThongKe.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageThongKe.Size = new System.Drawing.Size(767, 469);
+            this.tabPageThongKe.Size = new System.Drawing.Size(778, 483);
             this.tabPageThongKe.TabIndex = 4;
             this.tabPageThongKe.Text = "Thống kê";
             this.tabPageThongKe.UseVisualStyleBackColor = true;
@@ -463,7 +464,7 @@
             this.tabPageQuanLy.Location = new System.Drawing.Point(4, 25);
             this.tabPageQuanLy.Name = "tabPageQuanLy";
             this.tabPageQuanLy.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageQuanLy.Size = new System.Drawing.Size(767, 469);
+            this.tabPageQuanLy.Size = new System.Drawing.Size(778, 483);
             this.tabPageQuanLy.TabIndex = 3;
             this.tabPageQuanLy.Text = "Quản lý";
             this.tabPageQuanLy.UseVisualStyleBackColor = true;
@@ -472,7 +473,7 @@
             // 
             this.pnChildForm.Location = new System.Drawing.Point(4, 53);
             this.pnChildForm.Name = "pnChildForm";
-            this.pnChildForm.Size = new System.Drawing.Size(758, 410);
+            this.pnChildForm.Size = new System.Drawing.Size(758, 424);
             this.pnChildForm.TabIndex = 21;
             // 
             // btnQuanLyGoHome
@@ -542,8 +543,8 @@
             this.Load += new System.EventHandler(this.Form_Main_Load);
             this.tabControl.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelButton.ResumeLayout(false);
+            this.panelButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong)).EndInit();
             this.tabCTHD.ResumeLayout(false);
             this.tabCTHD.PerformLayout();
@@ -560,7 +561,7 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabHome;
         private System.Windows.Forms.TabPage tabCTHD;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelButton;
         private System.Windows.Forms.NumericUpDown nudSoLuong;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

@@ -18,6 +18,7 @@ namespace GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form_Main(new TaiKhoan_DTO("admin", "abc123", "TM", 1)));
+            //Application.Run(new Form_DangNhap());
         }
     }
 }

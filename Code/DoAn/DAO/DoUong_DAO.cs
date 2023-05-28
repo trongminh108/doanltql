@@ -57,5 +57,35 @@ namespace DAO
             }
             return int.Parse(dt.Rows[0]["id"].ToString());
         }
+
+        public static bool ThemDoUong(DoUong_DTO doUong)
+        {
+            string sTruyVan = string.Format(@"insert into douong values(N'{0}', '{1}')", doUong.Name, doUong.Price);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
+
+        public static bool CapNhatDoUong(DoUong_DTO doUong)
+        {
+            string sTruyVan = string.Format(@"UPDATE DoUong SET ten=N'{0}', gia='{1}' WHERE id='{2}'", 
+                doUong.Name, doUong.Price, doUong.Id);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
+
+        public static bool XoaDoUong(int idDoUong)
+        {
+            string sTruyVan = string.Format(
+                @"DELETE FROM douong WHERE id={0}",
+                idDoUong);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
     }
 }

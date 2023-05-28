@@ -23,10 +23,12 @@ namespace DAO
             return int.Parse(dt.Rows[0]["id"]+"");
         }
 
-        public static bool ThanhToanHoaDon(int idHD, DateTime tg)
+        public static bool ThanhToanHoaDon(int idHD, int tongtien, DateTime tg)
         {
             DateTime thoigian = tg;
-            string sTruyVan = string.Format(@"update hoadon set tinhtrang='1', thoigianlap='{0}' where id='{1}'", thoigian, idHD);
+            string sTruyVan = string.Format(@"update hoadon 
+                set tinhtrang='1', thoigianlap='{0}', tongtien={1} 
+                where id='{2}'", thoigian, tongtien, idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
             DataProvider.DongKetNoi(conn);
@@ -35,7 +37,29 @@ namespace DAO
 
         public static bool ThemHoaDon(int idBan, int tinhtrang)
         {
-            string sTruyVan = string.Format(@"insert into hoadon values('{0}', NULL,'{1}')", idBan, tinhtrang);
+            string sTruyVan = string.Format(@"insert into hoadon values('{0}', NULL,'{1}', 0)", idBan, tinhtrang);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
+
+        public static bool ChuyenBan(int idHD, int idBanMoi)
+        {
+            string sTruyVan = string.Format(@"update hoadon 
+                set idBan={0} 
+                where id='{1}'", idBanMoi, idHD);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
+
+        public static bool XoaHoaDon(int idHD)
+        {
+            string sTruyVan = string.Format(
+                @"DELETE FROM hoadon WHERE id={0}", 
+                idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
             DataProvider.DongKetNoi(conn);

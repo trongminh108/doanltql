@@ -29,7 +29,8 @@ CREATE TABLE HoaDon(
 	id INT IDENTITY PRIMARY KEY,
 	idBan INT,
 	thoigianlap DATETIME,
-	tinhtrang BIT DEFAULT 0
+	tinhtrang BIT DEFAULT 0,
+	tongtien INT DEFAULT 0
 	-- 0 la chua thanh toan
 	-- 1 la da thanh toan
 );
@@ -42,14 +43,15 @@ CREATE TABLE ThongTinHoaDon(
 );
 GO
 
-ALTER TABLE HoaDon ADD CONSTRAINT pk_Ban_HoaDon FOREIGN KEY (idBan) REFERENCES Ban(id);
+ALTER TABLE HoaDon ADD CONSTRAINT pk_Ban_HoaDon FOREIGN KEY (idBan) REFERENCES Ban(id) ON DELETE CASCADE;
 ALTER TABLE ThongTinHoaDon ADD CONSTRAINT pk_HoaDon_ThongTinHoaDon FOREIGN KEY (idHoaDon) REFERENCES HoaDon(id) ON DELETE CASCADE;
-ALTER TABLE ThongTinHoaDon ADD CONSTRAINT pk_DoUong_ThongTinHoaDon FOREIGN KEY (idDoUong) REFERENCES DoUong(id);
+ALTER TABLE ThongTinHoaDon ADD CONSTRAINT pk_DoUong_ThongTinHoaDon FOREIGN KEY (idDoUong) REFERENCES DoUong(id) ON DELETE CASCADE;
 GO
 
 -- Dữ liệu
 INSERT INTO Ban VALUES
 	(0), (0), (0), (0), (0);
+GO
 
 INSERT INTO DoUong VALUES 
 	(N'Cà phê đen', 18000),
@@ -62,16 +64,17 @@ INSERT INTO DoUong VALUES
 	(N'Trà sữa', 25000),
 	(N'Trà đào', 23000),
 	(N'Trà chanh', 15000);
+GO
 
 INSERT INTO TaiKhoan VALUES(N'admin','e99a18c428cb38d5f260853678922e03', N'Lưu Minh Trọng', 1);	/* Mật khẩu abc123 */
 INSERT INTO TaiKhoan VALUES(N'nhanvien','a906449d5769fa7361d7ecc6aa3f6d28', N'Trọng Minh', 2);	/* Mật khẩu 123abc */
-
+GO
 
 --Update
 UPDATE Ban SET tinhtrang=1 WHERE id = 3;
 
 --insert HoaDon
-INSERT INTO HoaDon VALUES (3, NULL, 0);
+INSERT INTO HoaDon VALUES (3, NULL, 0, 0);
 
 --insert ThongTinHoaDon
 INSERT INTO ThongTinHoaDon VALUES
@@ -92,5 +95,8 @@ INSERT INTO ThongTinHoaDon VALUES
 --INNER JOIN DoUong AS du ON du.id=tthd.idDoUong
 --WHERE hd.tinhtrang=0 AND hd.idBan=3;
 
---SELECT id FROM ThongTinHoaDon
---WHERE idDoUong=1 AND idHoaDon=9
+-- lấy bàn trống mà không có hóa đơn
+SELECT *
+FROM Ban b
+LEFT JOIN HoaDon hd ON b.id=hd.idBan
+WHERE b.tinhtrang=1

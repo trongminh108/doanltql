@@ -19,5 +19,10 @@ namespace BUS
         {
             return Ban_DAO.ThanhToanBan(id, tinhtrang);
         }
+
+        public static List<Ban_DTO> LayBanCoNguoiKhongCoHD()
+        {
+            return Ban_DAO.LayBanCoNguoiKhongCoHD();
+        }
     }
 }

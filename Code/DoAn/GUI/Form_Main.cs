@@ -31,7 +31,7 @@ namespace GUI
             lblHello.Text = "Xin chào, " + tk.DisplayName;
         }        
 
-        private void Form_Main_Load(object sender, EventArgs e)
+        public void HienThiDoUong()
         {
             List<DoUong_DTO> lstDoUong = DoUong_BUS.LayDoUong();
             cbDoUong.DataSource = lstDoUong;
@@ -45,6 +45,11 @@ namespace GUI
             cbDoUong2.SelectedIndex = 0;
             HienThiBan();
             HienThiGia();
+        }
+
+        private void Form_Main_Load(object sender, EventArgs e)
+        {
+            HienThiDoUong();
         }
 
         public void HienThiBan()
@@ -62,7 +67,6 @@ namespace GUI
                 {
                     btn.BackColor = Color.Aqua;
                 }
-
                 fpnDanhSachBan.Controls.Add(btn);
             }
         }
@@ -70,20 +74,31 @@ namespace GUI
         public void HienThiChiTietHoaDon(int idHD)
         {
             lstCTHD = ThongTinHoaDon_BUS.LayChiTietHD(idHD);
-            dgvCTHD.DataSource = lstCTHD;
-            dgvCTHD.ReadOnly = true;
-            dgvCTHD.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            string[] names = { "Đồ uống", "Số lượng", "Đơn giá" };
-            double[] widths = { 0.4, 0.3, 0.3 };
-            int width = dgvCTHD.Width;
-            int i = 0;
-            foreach (DataGridViewColumn col in dgvCTHD.Columns)
+            string total = "0";
+            if (lstCTHD != null)
             {
-                col.HeaderText = names[i];
-                col.Width = (int)(widths[i] * width);
-                i += 1;
+                dgvCTHD.DataSource = lstCTHD;
+                dgvCTHD.ReadOnly = true;
+                dgvCTHD.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvCTHD.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvCTHD.ColumnHeadersDefaultCellStyle.Font = new Font(dgvCTHD.Font, FontStyle.Bold); // Make header text bold
+                string[] names = { "Đồ uống", "Số lượng", "Đơn giá" };
+                double[] widths = { 0.4, 0.2, 0.3 };
+                int width = dgvCTHD.Width;
+                int i = 0;
+                foreach (DataGridViewColumn col in dgvCTHD.Columns)
+                {
+                    col.HeaderText = names[i];
+                    col.Width = (int)(widths[i] * width);
+                    i += 1;
+                }
+                total = Functions.TinhTongTien(lstCTHD).ToString("#,###");
             }
-            string total = Functions.TinhTongTien(lstCTHD).ToString("#,###");
+            else
+            {
+                dgvCTHD.DataSource = null;
+            }
+            
             lblTongTien.Text = "Tổng tiền: " + total + "vnđ";
         }
 
@@ -116,7 +131,10 @@ namespace GUI
                 }
                 else
                 {
-                    MessageBox.Show("Bàn này đang trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (lstBan[idBan-1].Status)
+                        MessageBox.Show("Bàn này đã gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Bàn này đang trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -130,6 +148,12 @@ namespace GUI
             idBan = ((sender as Button).Tag as Ban_DTO).Id;
             idHoaDon = HoaDon_BUS.LayIDHoaDon(idBan);
             lblIdBan.Text = idBan + "";
+            if (idHoaDon == -1 && (sender as Button).BackColor==Color.Aqua)
+            {
+                btnThem.Enabled = false;
+            }
+            else
+                btnThem.Enabled = true;
         }
 
         private void cbDoUong_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,9 +208,7 @@ namespace GUI
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            
-            
-            DialogResult answer = MessageBox.Show("Bạn muốn in hóa đơn bàn này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult answer = MessageBox.Show("Bạn muốn thanh toán hóa đơn bàn này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             DateTime billDate = DateTime.Now;
             if (answer == DialogResult.Yes)
             {
@@ -196,10 +218,16 @@ namespace GUI
                     lstInCTHD.Add(new InCTHD(idHoaDon, billDate, idBan, cthd));
                 }
                 new Form_ChiTietHoaDon(lstInCTHD).ShowDialog();
-                HoaDon_BUS.ThanhToanHoaDon(idHoaDon, billDate);
+                HoaDon_BUS.ThanhToanHoaDon(idHoaDon, Functions.TinhTongTien(lstCTHD), billDate);
                 Ban_BUS.ThanhToanBan(idBan, 0);
-                HienThiBan();
                 tabControl.SelectedIndex = 0;
+                List<Ban_DTO> lstBanKhongHD = Ban_BUS.LayBanCoNguoiKhongCoHD();
+                if (lstBanKhongHD != null)
+                    foreach(Ban_DTO ban in lstBanKhongHD)
+                    {
+                        Ban_BUS.ThanhToanBan(ban.Id, 0);
+                    }
+                HienThiBan();
             }            
         }
 
@@ -210,10 +238,35 @@ namespace GUI
                 MessageBox.Show("Bạn không quyền truy cập tab này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 tabControl.SelectedTab = tabHome;
             }
+            else if (tabControl.SelectedIndex == 1)
+            {
+                idHoaDon = HoaDon_BUS.LayIDHoaDon(idBan);
+                HienThiDoUong();
+                if (idHoaDon != -1)
+                    HienThiChiTietHoaDon(idHoaDon);
+                else
+                {
+                    if (lstBan[idBan - 1].Status)
+                        MessageBox.Show("Bàn này đã gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Bàn này đang trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tabControl.SelectedIndex = 0;
+                }
+            }
+            else if (tabControl.SelectedIndex == 0)
+            {
+                HienThiDoUong();
+            }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
+            //string temp = "";
+            //foreach (Control con in panelButton.Controls)
+            //{
+            //    temp += con.Text + "\n";
+            //}
+            //MessageBox.Show(temp);
             this.Close();
             Form_DangNhap.isExit = true;
         }
@@ -262,6 +315,7 @@ namespace GUI
             if (tableStatus)
             {
                 new Form_ChuyenBan(idBan).ShowDialog();
+                HienThiBan();
             }
             else
                 MessageBox.Show("Bàn này đang trống, không cần chuyển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -312,6 +366,18 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private void btnGopBan_Click(object sender, EventArgs e)
+        {
+            bool tableStatus = lstBan[idBan - 1].Status;
+            if (tableStatus)
+            {
+                new Form_GopBan(idBan).ShowDialog();
+                HienThiBan();
+            }
+            else
+                MessageBox.Show("Bàn này đang trống, không cần gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -19,6 +19,13 @@ namespace DTO
             this.price = price;
         }
 
+        public DoUong_DTO(string name, int price)
+        {
+            this.id = -1;
+            this.name = name;
+            this.price = price;
+        }
+
         public DoUong_DTO() { }
 
         public int Id { get => id; set => id = value; }

@@ -103,5 +103,32 @@ namespace DAO
             DataProvider.DongKetNoi(conn);
             return kq;
         }
+
+        public static List<ThongTinHoaDon_DTO> LayThongTinHoaDon(int idHD)
+        {
+            string sTruyVan = string.Format(
+                @"SELECT * 
+                FROM ThongTinHoaDon tthd
+                WHERE tthd.idHoaDon={0}
+            ", idHD);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            if (dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            List<ThongTinHoaDon_DTO> lst = new List<ThongTinHoaDon_DTO>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                ThongTinHoaDon_DTO ban = new ThongTinHoaDon_DTO();
+                ban.Id = int.Parse(dt.Rows[i][0].ToString());
+                ban.IdBill = int.Parse(dt.Rows[i][1].ToString());
+                ban.IdDrink = int.Parse(dt.Rows[i][2].ToString());
+                ban.Quantity = int.Parse(dt.Rows[i][3].ToString());
+                lst.Add(ban);
+            }
+            DataProvider.DongKetNoi(conn);
+            return lst;
+        }
     }
 }

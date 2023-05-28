@@ -90,3 +90,4 @@ E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\bin\Debug\EntityFramework.SqlServer.xml
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\obj\Debug\GUI.Form_ChiTietHoaDon.resources
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\bin\Debug\ChiTietHoaDon.rdlc
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\obj\Debug\GUI.Form_GopBan.resources

@@ -10,6 +10,8 @@ namespace DTO
     {
         int id;
         bool status;
+        // false là trống
+        // true là có người
 
         public Ban_DTO(int id, bool status)
         {

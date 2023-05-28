@@ -12,6 +12,7 @@ namespace DTO
         int idTable;
         DateTime thoigianlap;
         bool status;
+        int tongtien;
 
         public HoaDon_DTO(int id, int idTable, DateTime thoigianlap, bool status)
         {
@@ -27,5 +28,6 @@ namespace DTO
         public int IdTable { get => idTable; set => idTable = value; }
         public bool Status { get => status; set => status = value; }
         public DateTime Thoigianlap { get => thoigianlap; set => thoigianlap = value; }
+        public int Tongtien { get => tongtien; set => tongtien = value; }
     }
 }

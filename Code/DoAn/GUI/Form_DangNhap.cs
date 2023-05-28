@@ -15,6 +15,9 @@ namespace GUI
     public partial class Form_DangNhap : Form
     {
         public static bool isExit = false;
+        private Size originFormSize;
+        private List<Rectangle> originControl;
+        private List<float> originSize;
 
         public Form_DangNhap()
         {
@@ -24,6 +27,14 @@ namespace GUI
         private void Form_DangNhap_Load(object sender, EventArgs e)
         {
             txtUsername.Focus();
+            this.originFormSize = this.Size;
+            originControl = new List<Rectangle>();
+            originSize = new List<float>();
+            foreach (Control con in this.Controls)
+            {
+                originControl.Add(new Rectangle(con.Location, con.Size));
+                originSize.Add(con.Font.Size);
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -73,6 +84,16 @@ namespace GUI
             if (e.KeyCode == Keys.Enter)
             {
                 btnLogin_Click(sender, new EventArgs());
+            }
+        }
+
+        private void Form_DangNhap_Resize(object sender, EventArgs e)
+        {
+            int i = 0;
+            foreach (Control con in this.Controls)
+            {
+                Functions.ResizeControl(this.Size, originFormSize, con, originControl[i], originSize[i]);
+                i++;
             }
         }
     }

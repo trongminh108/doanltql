@@ -52,5 +52,10 @@ namespace BUS
             }
             return false;
         }
+
+        public static List<ThongTinHoaDon_DTO> LayThongTinHoaDon(int idHD)
+        {
+            return ThongTinHoaDon_DAO.LayThongTinHoaDon(idHD);
+        }
     }
 }
