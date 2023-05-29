@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ban_DTO.cs" />
+    <Compile Include="BaoCaoDoanhThu_DTO.cs" />
+    <Compile Include="BCTK_DoUong.cs" />
     <Compile Include="ChiTietHoaDon_DTO.cs" />
     <Compile Include="DoUong_DTO.cs" />
     <Compile Include="HoaDon_DTO.cs" />

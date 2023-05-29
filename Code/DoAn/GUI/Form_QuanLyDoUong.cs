@@ -16,6 +16,7 @@ namespace GUI
     {
         List<DoUong_DTO> lstDoUong = null;
         int idx = -1;
+        string placeholderText = "nhập tên đồ uống";
         public Form_QuanLyDoUong()
         {
             InitializeComponent();
@@ -23,18 +24,11 @@ namespace GUI
             dgvTU.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTU.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvTU.ColumnHeadersDefaultCellStyle.Font = new Font(dgvTU.Font, FontStyle.Bold); // Make header text bold
+            SetPlaceholderText();
         }
 
-        public void HienThiDoUong()
+        public void FormatDGV()
         {
-            lstDoUong = DoUong_BUS.LayDoUong();
-            dgvTU.DataSource = lstDoUong;
-            lblTongDoUong.Text = "Tổng đồ uống: " + lstDoUong.Count;
-        }
-
-        private void Form_QuanLyDoUong_Load(object sender, EventArgs e)
-        {
-            HienThiDoUong();
             string[] names = { "STT", "Tên đồ uống", "Đơn giá" };
             double[] widths = { 0.2, 0.4, 0.3 };
             int width = dgvTU.Width;
@@ -52,15 +46,28 @@ namespace GUI
             }
         }
 
-        private void dgvTU_Click(object sender, EventArgs e)
+        public void HienThiDoUong()
         {
-            idx = dgvTU.CurrentRow.Index;
-            if (idx >= 0 && idx <= dgvTU.Rows.Count - 1)
-            {
-                txtTenTU.Text = dgvTU[1, idx].Value.ToString();
-                txtDonGiaTU.Text = dgvTU[2, idx].Value.ToString();
-            }
+            lstDoUong = DoUong_BUS.LayDoUong();
+            dgvTU.DataSource = lstDoUong;
+            lblTongDoUong.Text = "Tổng đồ uống: " + lstDoUong.Count;
+            FormatDGV();
         }
+
+        private void Form_QuanLyDoUong_Load(object sender, EventArgs e)
+        {
+            HienThiDoUong();
+        }
+
+        //private void dgvTU_Click(object sender, EventArgs e)
+        //{
+        //    idx = dgvTU.CurrentRow.Index;
+        //    if (idx >= 0 && idx <= dgvTU.Rows.Count - 1)
+        //    {
+        //        txtTenTU.Text = dgvTU[1, idx].Value.ToString();
+        //        txtDonGiaTU.Text = dgvTU[2, idx].Value.ToString();
+        //    }
+        //}
 
         private void btnThemTU_Click(object sender, EventArgs e)
         {
@@ -123,6 +130,67 @@ namespace GUI
                     DoUong_BUS.XoaDoUong(id);
                     HienThiDoUong();
                 }
+            }
+        }
+
+        private void SetPlaceholderText()
+        {
+            txtTimTU.Text = placeholderText;
+            txtTimTU.ForeColor = Color.Gray;
+        }
+
+        private void txtTimTU_Enter(object sender, EventArgs e)
+        {
+            if (txtTimTU.Text == placeholderText)
+            {
+                txtTimTU.Text = "";
+                txtTimTU.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtTimTU_Leave(object sender, EventArgs e)
+        {
+            if (txtTimTU.Text == "")
+            {
+                txtTimTU.Text = placeholderText;
+                txtTimTU.ForeColor = Color.Silver;
+            }
+        }
+
+        private void txtTimTU_TextChanged(object sender, EventArgs e)
+        {
+            string key = Functions.RemoveUnicode(txtTimTU.Text.Trim().ToLower());
+            if (key != "" && lstDoUong != null && txtTimTU.Text!=placeholderText)
+            {
+                List<DoUong_DTO> lstRes = new List<DoUong_DTO>();
+                foreach (DoUong_DTO dto in lstDoUong)
+                {
+                    string tuGoc = Functions.RemoveUnicode(dto.Name.Trim().ToLower());
+                    if (tuGoc.StartsWith(key))
+                        lstRes.Add(dto);
+                }
+                dgvTU.DataSource = lstRes;
+                if (lstRes != null)
+                {
+                    FormatDGV();
+                    lblTongDoUong.Text = "Tổng đồ uống: " + lstRes.Count;
+                }
+                else
+                    lblTongDoUong.Text = Functions.RemoveUnicode("Tổng đồ uống: 0");
+            }
+            else
+            {
+                HienThiDoUong();
+            }
+        }
+
+        private void dgvTU_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            idx = e.RowIndex;
+            if (idx >= 0 && idx <= dgvTU.Rows.Count - 1)
+            {
+                txtTenTU.Text = dgvTU[1, idx].Value.ToString();
+                txtDonGiaTU.Text = dgvTU[2, idx].Value.ToString();
             }
         }
     }

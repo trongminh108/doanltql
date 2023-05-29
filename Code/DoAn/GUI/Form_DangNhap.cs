@@ -15,6 +15,7 @@ namespace GUI
     public partial class Form_DangNhap : Form
     {
         public static bool isExit = false;
+        public static bool isLogout = false;
         private Size originFormSize;
         private List<Rectangle> originControl;
         private List<float> originSize;
@@ -48,9 +49,10 @@ namespace GUI
                 (new Form_Main(tk)).ShowDialog();
                 txtUsername.Text = "";
                 txtPassword.Text = "";
-                this.Show();
-                if (isExit)
+                if (isExit && !isLogout)
                     Application.Exit();
+                this.Show();
+                isLogout = false;
             }
             else
             {

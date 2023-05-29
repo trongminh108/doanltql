@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoCafe.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -124,6 +127,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="BCTK_DoUong.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_GopBan.resx">
       <DependentUpon>Form_GopBan.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,7 +167,12 @@
     <EmbeddedResource Include="ChiTietHoaDon.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="BCTK_HoaDon.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DTO.BaoCaoDoanhThu_DTO.datasource" />
+    <None Include="Properties\DataSources\DTO.BCTK_DoUong.datasource" />
     <None Include="Properties\DataSources\DTO.ChiTietHoaDon_DTO.datasource" />
     <None Include="Properties\DataSources\DTO.InCTHD.datasource" />
     <None Include="Properties\Settings.settings">
@@ -192,6 +203,10 @@
     <None Include="Resources\addIcon-removebg-preview.png" />
     <None Include="Resources\editIcon.png" />
     <None Include="Resources\deleteIcon.png" />
+    <None Include="Resources\FullTableIcon.png" />
+    <Content Include="LogoCafe.ico" />
+    <None Include="Resources\background.png" />
+    <None Include="Resources\background2.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

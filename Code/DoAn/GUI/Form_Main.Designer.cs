@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.fpnDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
@@ -59,7 +60,14 @@
             this.cbDoUong2 = new System.Windows.Forms.ComboBox();
             this.lblHoaDonBan = new System.Windows.Forms.Label();
             this.tabPageBaoCao = new System.Windows.Forms.TabPage();
-            this.tabPageThongKe = new System.Windows.Forms.TabPage();
+            this.rpBCTK = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.rbtnToDate = new System.Windows.Forms.RadioButton();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.rbtnNow = new System.Windows.Forms.RadioButton();
+            this.btnXemBC = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPageQuanLy = new System.Windows.Forms.TabPage();
             this.pnChildForm = new System.Windows.Forms.Panel();
             this.btnQuanLyGoHome = new System.Windows.Forms.Button();
@@ -67,6 +75,8 @@
             this.btnQuanLyDoUong = new System.Windows.Forms.Button();
             this.btnThemBan = new System.Windows.Forms.Button();
             this.lblHello = new System.Windows.Forms.Label();
+            this.linkLabelDangXuat = new System.Windows.Forms.LinkLabel();
+            this.cbBCTK = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.panelButton.SuspendLayout();
@@ -74,6 +84,8 @@
             this.tabCTHD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCTHD)).BeginInit();
+            this.tabPageBaoCao.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPageQuanLy.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +94,6 @@
             this.tabControl.Controls.Add(this.tabHome);
             this.tabControl.Controls.Add(this.tabCTHD);
             this.tabControl.Controls.Add(this.tabPageBaoCao);
-            this.tabControl.Controls.Add(this.tabPageThongKe);
             this.tabControl.Controls.Add(this.tabPageQuanLy);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(13, 37);
@@ -436,23 +447,108 @@
             // 
             // tabPageBaoCao
             // 
+            this.tabPageBaoCao.Controls.Add(this.rpBCTK);
+            this.tabPageBaoCao.Controls.Add(this.groupBox1);
             this.tabPageBaoCao.Location = new System.Drawing.Point(4, 25);
             this.tabPageBaoCao.Name = "tabPageBaoCao";
             this.tabPageBaoCao.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageBaoCao.Size = new System.Drawing.Size(778, 483);
             this.tabPageBaoCao.TabIndex = 2;
-            this.tabPageBaoCao.Text = "Báo cáo";
+            this.tabPageBaoCao.Text = "Báo cáo thống kê";
             this.tabPageBaoCao.UseVisualStyleBackColor = true;
             // 
-            // tabPageThongKe
+            // rpBCTK
             // 
-            this.tabPageThongKe.Location = new System.Drawing.Point(4, 25);
-            this.tabPageThongKe.Name = "tabPageThongKe";
-            this.tabPageThongKe.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageThongKe.Size = new System.Drawing.Size(778, 483);
-            this.tabPageThongKe.TabIndex = 4;
-            this.tabPageThongKe.Text = "Thống kê";
-            this.tabPageThongKe.UseVisualStyleBackColor = true;
+            this.rpBCTK.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rpBCTK.Location = new System.Drawing.Point(3, 103);
+            this.rpBCTK.Name = "rpBCTK";
+            this.rpBCTK.ServerReport.BearerToken = null;
+            this.rpBCTK.Size = new System.Drawing.Size(772, 377);
+            this.rpBCTK.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbBCTK);
+            this.groupBox1.Controls.Add(this.dtpToDate);
+            this.groupBox1.Controls.Add(this.rbtnToDate);
+            this.groupBox1.Controls.Add(this.dtpFromDate);
+            this.groupBox1.Controls.Add(this.rbtnNow);
+            this.groupBox1.Controls.Add(this.btnXemBC);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(16, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(744, 91);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Báo cáo";
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpToDate.Enabled = false;
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToDate.Location = new System.Drawing.Point(531, 46);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(110, 26);
+            this.dtpToDate.TabIndex = 5;
+            this.dtpToDate.Value = new System.DateTime(2023, 5, 29, 0, 0, 0, 0);
+            // 
+            // rbtnToDate
+            // 
+            this.rbtnToDate.AutoSize = true;
+            this.rbtnToDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnToDate.Location = new System.Drawing.Point(371, 47);
+            this.rbtnToDate.Name = "rbtnToDate";
+            this.rbtnToDate.Size = new System.Drawing.Size(144, 24);
+            this.rbtnToDate.TabIndex = 4;
+            this.rbtnToDate.Text = "hoặc đến ngày";
+            this.rbtnToDate.UseVisualStyleBackColor = true;
+            this.rbtnToDate.CheckedChanged += new System.EventHandler(this.rbtnToDate_CheckedChanged);
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromDate.Location = new System.Drawing.Point(108, 46);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(110, 26);
+            this.dtpFromDate.TabIndex = 3;
+            this.dtpFromDate.Value = new System.DateTime(2002, 1, 8, 0, 0, 0, 0);
+            // 
+            // rbtnNow
+            // 
+            this.rbtnNow.AutoSize = true;
+            this.rbtnNow.Checked = true;
+            this.rbtnNow.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnNow.Location = new System.Drawing.Point(234, 47);
+            this.rbtnNow.Name = "rbtnNow";
+            this.rbtnNow.Size = new System.Drawing.Size(121, 24);
+            this.rbtnNow.TabIndex = 2;
+            this.rbtnNow.TabStop = true;
+            this.rbtnNow.Text = "đến hiện tại";
+            this.rbtnNow.UseVisualStyleBackColor = true;
+            this.rbtnNow.CheckedChanged += new System.EventHandler(this.rbtnNow_CheckedChanged);
+            // 
+            // btnXemBC
+            // 
+            this.btnXemBC.Location = new System.Drawing.Point(657, 42);
+            this.btnXemBC.Name = "btnXemBC";
+            this.btnXemBC.Size = new System.Drawing.Size(75, 34);
+            this.btnXemBC.TabIndex = 1;
+            this.btnXemBC.Text = "Xem";
+            this.btnXemBC.UseVisualStyleBackColor = true;
+            this.btnXemBC.Click += new System.EventHandler(this.btnXemBC_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(15, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 20);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Từ ngày:";
             // 
             // tabPageQuanLy
             // 
@@ -530,16 +626,43 @@
             this.lblHello.TabIndex = 9;
             this.lblHello.Text = "Tên đăng nhập:";
             // 
+            // linkLabelDangXuat
+            // 
+            this.linkLabelDangXuat.AutoSize = true;
+            this.linkLabelDangXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelDangXuat.Location = new System.Drawing.Point(685, 9);
+            this.linkLabelDangXuat.Name = "linkLabelDangXuat";
+            this.linkLabelDangXuat.Size = new System.Drawing.Size(110, 25);
+            this.linkLabelDangXuat.TabIndex = 10;
+            this.linkLabelDangXuat.TabStop = true;
+            this.linkLabelDangXuat.Text = "Đăng xuất";
+            this.linkLabelDangXuat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDangXuat_LinkClicked);
+            // 
+            // cbBCTK
+            // 
+            this.cbBCTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBCTK.FormattingEnabled = true;
+            this.cbBCTK.Items.AddRange(new object[] {
+            "Hóa đơn",
+            "Đồ uống"});
+            this.cbBCTK.Location = new System.Drawing.Point(76, 0);
+            this.cbBCTK.Name = "cbBCTK";
+            this.cbBCTK.Size = new System.Drawing.Size(160, 33);
+            this.cbBCTK.TabIndex = 6;
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 561);
+            this.Controls.Add(this.linkLabelDangXuat);
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trang chủ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
             this.Load += new System.EventHandler(this.Form_Main_Load);
             this.tabControl.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
@@ -550,6 +673,9 @@
             this.tabCTHD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCTHD)).EndInit();
+            this.tabPageBaoCao.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPageQuanLy.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -591,11 +717,20 @@
         private System.Windows.Forms.TabPage tabPageQuanLy;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnChiTietGoHome;
-        private System.Windows.Forms.TabPage tabPageThongKe;
         private System.Windows.Forms.Panel pnChildForm;
         private System.Windows.Forms.Button btnQuanLyGoHome;
         private System.Windows.Forms.Button btnQuanLyTaiKhoan;
         private System.Windows.Forms.Button btnQuanLyDoUong;
         private System.Windows.Forms.Button btnThemBan;
+        private System.Windows.Forms.LinkLabel linkLabelDangXuat;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dtpToDate;
+        private System.Windows.Forms.RadioButton rbtnToDate;
+        private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.RadioButton rbtnNow;
+        private System.Windows.Forms.Button btnXemBC;
+        private System.Windows.Forms.Label label6;
+        private Microsoft.Reporting.WinForms.ReportViewer rpBCTK;
+        private System.Windows.Forms.ComboBox cbBCTK;
     }
 }

@@ -42,6 +42,9 @@ namespace GUI
                 if (ban.Status)
                 {
                     btn.BackColor = Color.Aqua;
+                    btn.TextAlign = ContentAlignment.TopCenter;
+                    btn.BackgroundImage = Properties.Resources.FullTableIcon;
+                    btn.Font = new Font(btn.Font, FontStyle.Bold);
                 }
 
                 fpnDanhSachBan.Controls.Add(btn);

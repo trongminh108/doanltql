@@ -88,6 +88,7 @@ INSERT INTO ThongTinHoaDon VALUES
 --SELECT * FROM ThongTinHoaDon
 --SELECT * FROM Ban
 --SELECT * FROM DoUong
+--SELECT * FROM TaiKhoan
 
 --SELECT tthd.id, hd.thoigianlap, du.ten, tthd.soLuong, du.gia
 --FROM ThongTinHoaDon tthd
@@ -95,8 +96,11 @@ INSERT INTO ThongTinHoaDon VALUES
 --INNER JOIN DoUong AS du ON du.id=tthd.idDoUong
 --WHERE hd.tinhtrang=0 AND hd.idBan=3;
 
--- lấy bàn trống mà không có hóa đơn
-SELECT *
-FROM Ban b
-LEFT JOIN HoaDon hd ON b.id=hd.idBan
-WHERE b.tinhtrang=1
+-- lấy số lượng đồ uống
+SELECT DU.id AS IDDoUong, DU.ten AS TenDoUong, SUM(THD.soLuong) AS SoLuong, DU.gia AS DonGia
+FROM DoUong DU
+INNER JOIN ThongTinHoaDon THD ON DU.id = THD.idDoUong
+INNER JOIN HoaDon HD ON HD.id = THD.idHoaDon
+WHERE HD.thoigianlap >= '5-28-2023' AND HD.thoigianlap <= GETDATE()
+GROUP BY DU.id, DU.ten, DU.gia
+ORDER BY SoLuong 

@@ -34,5 +34,10 @@ namespace BUS
         {
             return HoaDon_DAO.XoaHoaDon(idHD);
         }
+
+        public static List<HoaDon_DTO> LayHoaDonTuNgay(DateTime from, DateTime to)
+        {
+            return HoaDon_DAO.LayHoaDonTuNgay(from, to);
+        }
     }
 }

@@ -34,20 +34,26 @@ namespace GUI
             foreach (Ban_DTO ban in lstBan)
             {
                 string status = ban.Status ? "Có người" : "Trống";
-                Button btn = new Button() { Width = tableWidth, Height = tableHeight };
-                btn.Text = "Bàn " + ban.Id + Environment.NewLine + status;
-                btn.Tag = ban;
-                btn.Click += new System.EventHandler(this.btnBan_Click);
                 if (ban.Status)
                 {
-                    btn.BackColor = Color.Aqua;
-                }
-                if (ban.Id == idBanGoc)
-                {
-                    btn.BackColor = Color.Red;
-                }
+                    Button btn = new Button() { Width = tableWidth, Height = tableHeight };
+                    btn.Text = "Bàn " + ban.Id + Environment.NewLine + status;
+                    btn.Tag = ban;
+                    btn.Click += new System.EventHandler(this.btnBan_Click);
+                    if (ban.Status)
+                    {
+                        btn.BackColor = Color.Aqua;
+                        btn.TextAlign = ContentAlignment.TopCenter;
+                        btn.BackgroundImage = Properties.Resources.FullTableIcon;
+                        btn.Font = new Font(btn.Font, FontStyle.Bold);
+                    }
+                    if (ban.Id == idBanGoc)
+                    {
+                        btn.BackColor = Color.Red;
+                    }
 
-                fpnDanhSachBan.Controls.Add(btn);
+                    fpnDanhSachBan.Controls.Add(btn);
+                }
             }
         }
 

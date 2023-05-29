@@ -16,6 +16,11 @@ namespace BUS
             return DoUong_DAO.LayDoUong();
         }
 
+        public static List<DoUong_DTO> LayDoUong(string ten)
+        {
+            return DoUong_DAO.LayDoUong(ten);
+        }
+
         public static int getGia(int id)
         {
             return DoUong_DAO.getGia(id);
@@ -75,6 +80,11 @@ namespace BUS
         public static bool XoaDoUong(int idDoUong)
         {
             return DoUong_DAO.XoaDoUong(idDoUong);
+        }
+
+        public static List<BCTK_DoUong> LaySoLuongDoUongTheoNgay(DateTime fd, DateTime td)
+        {
+            return DoUong_DAO.LaySoLuongDoUongTheoNgay(fd, td);
         }
     }
 }

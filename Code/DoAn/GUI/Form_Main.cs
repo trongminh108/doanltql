@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +51,7 @@ namespace GUI
         private void Form_Main_Load(object sender, EventArgs e)
         {
             HienThiDoUong();
+            this.rpBCTK.RefreshReport();
         }
 
         public void HienThiBan()
@@ -66,6 +68,9 @@ namespace GUI
                 if (ban.Status)
                 {
                     btn.BackColor = Color.Aqua;
+                    btn.TextAlign = ContentAlignment.TopCenter;
+                    btn.BackgroundImage = Properties.Resources.FullTableIcon;
+                    btn.Font = new Font(btn.Font, FontStyle.Bold);
                 }
                 fpnDanhSachBan.Controls.Add(btn);
             }
@@ -257,6 +262,10 @@ namespace GUI
             {
                 HienThiDoUong();
             }
+            else if (tabControl.SelectedTab == tabPageBaoCao)
+            {
+                cbBCTK.SelectedIndex = 0;
+            }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -378,6 +387,98 @@ namespace GUI
             }
             else
                 MessageBox.Show("Bàn này đang trống, không cần gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void linkLabelDangXuat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DialogResult answer = MessageBox.Show(
+                    "Bạn có muốn đăng xuất không?",
+                    "Đăng xuất",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+            if (answer==DialogResult.Yes)
+                this.Close();
+            Form_DangNhap.isLogout = true;
+        }
+
+        private void rbtnNow_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpToDate.Enabled = false;
+        }
+
+        private void rbtnToDate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpToDate.Enabled = true;
+        }
+
+        private void btnXemBC_Click(object sender, EventArgs e)
+        {
+            DateTime fromDate = dtpFromDate.Value;
+            DateTime toDate = dtpToDate.Value;
+            if (rbtnNow.Checked)
+                toDate = DateTime.Now;
+            if (cbBCTK.SelectedIndex == 0)
+            {
+                List<HoaDon_DTO> lstHoaDonBC = HoaDon_BUS.LayHoaDonTuNgay(fromDate, toDate);
+                List<BaoCaoDoanhThu_DTO> lstBCDT = new List<BaoCaoDoanhThu_DTO>();
+                BaoCaoDoanhThu_DTO bcdt = null;
+                if (lstHoaDonBC != null)
+                    foreach (HoaDon_DTO hoaDon in lstHoaDonBC)
+                    {
+                        bcdt = new BaoCaoDoanhThu_DTO();
+                        bcdt.IdHoaDon = hoaDon.Id;
+                        bcdt.IdBan = hoaDon.IdTable;
+                        bcdt.NgayLap = hoaDon.Thoigianlap;
+                        bcdt.TongTien = hoaDon.Tongtien;
+                        bcdt.TuNgay = fromDate;
+                        bcdt.DenNgay = toDate;
+                        lstBCDT.Add(bcdt);
+                    }
+                else
+                {
+                    DialogResult answer = MessageBox.Show(
+                    "Không có hóa đơn nào từ ngày: " + fromDate.ToString() 
+                    + " -> " + toDate.ToString(),
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                rpBCTK.LocalReport.ReportPath = "BCTK_HoaDon.rdlc";
+                rpBCTK.LocalReport.DataSources.Clear();
+                var source = new ReportDataSource("DataSetBCTK_HoaDon", lstBCDT);
+                rpBCTK.LocalReport.DataSources.Add(source);
+                this.rpBCTK.RefreshReport();
+            }
+            else if (cbBCTK.SelectedIndex == 1)
+            {
+                List<BCTK_DoUong> lstBCDU = DoUong_BUS.LaySoLuongDoUongTheoNgay(fromDate, toDate);
+                if (lstBCDU != null)
+                    foreach (BCTK_DoUong doUong in lstBCDU)
+                    {
+                        doUong.TuNgay = fromDate;
+                        doUong.DenNgay = toDate;
+                    }
+                else
+                {
+                    DialogResult answer = MessageBox.Show(
+                    "Không thức uống nào được bán từ ngày: " + fromDate.ToString()
+                    + " -> " + toDate.ToString(),
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                rpBCTK.LocalReport.ReportPath = "BCTK_DoUong.rdlc";
+                rpBCTK.LocalReport.DataSources.Clear();
+                var source = new ReportDataSource("DataSetBCTK_DoUong", lstBCDU);
+                rpBCTK.LocalReport.DataSources.Add(source);
+                this.rpBCTK.RefreshReport();
+            }
+        }
+
+
+        private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form_DangNhap.isExit = true;
         }
     }
 }
