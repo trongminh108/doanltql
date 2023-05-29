@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace DAO
 {
@@ -62,6 +63,13 @@ namespace DAO
                 idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            sTruyVan = @"
+                DECLARE
+	            @gtMoi INT 
+	            SELECT @gtMoi = MAX(id) FROM hoadon;
+	            DBCC CHECKIDENT ('hoadon', RESEED, @gtMoi);
+            ";
+            DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
             DataProvider.DongKetNoi(conn);
             return kq;
         }
@@ -87,6 +95,42 @@ namespace DAO
                 temp.IdTable = int.Parse(dt.Rows[i][1].ToString());
                 temp.Thoigianlap = DateTime.Parse(dt.Rows[i][2].ToString());
                 temp.Status = (bool) dt.Rows[i][3];
+                temp.Tongtien = int.Parse(dt.Rows[i][4].ToString());
+                lst.Add(temp);
+            }
+            DataProvider.DongKetNoi(conn);
+            return lst;
+        }
+
+        public static List<HoaDon_DTO> LayHoaDon(int idBan)
+        {
+            string sTruyVan = string.Format(
+                @"SELECT *
+                FROM HoaDon
+                WHERE idBan=N'{0}'",
+                idBan);
+            DateTime tg = DateTime.Now;
+            SqlConnection conn = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            if (dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            List<HoaDon_DTO> lst = new List<HoaDon_DTO>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                HoaDon_DTO temp = new HoaDon_DTO();
+                temp.Id = int.Parse(dt.Rows[i][0].ToString());
+                temp.IdTable = int.Parse(dt.Rows[i][1].ToString());
+                try
+                {
+                    temp.Thoigianlap = DateTime.Parse(dt.Rows[i][2].ToString());
+                }
+                catch
+                {
+                    temp.Thoigianlap = tg;
+                }
+                temp.Status = (bool)dt.Rows[i][3];
                 temp.Tongtien = int.Parse(dt.Rows[i][4].ToString());
                 lst.Add(temp);
             }

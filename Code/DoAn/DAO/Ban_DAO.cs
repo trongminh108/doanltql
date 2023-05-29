@@ -69,5 +69,51 @@ namespace DAO
             DataProvider.DongKetNoi(conn);
             return lst;
         }
+
+        public static bool ThemBan()
+        {
+            string sTruyVan = string.Format(
+                @"INSERT INTO ban VALUES (0)"
+            );
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
+
+        public static bool LayTinhTrang(int idBan)
+        {
+            string sTruyVan = string.Format(
+                @"
+                    SELECT tinhtrang
+                    FROM ban
+                    WHERE id={0}
+                "
+                , idBan);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            if (dt.Rows.Count == 0)
+            {
+                return false;
+            }
+            DataProvider.DongKetNoi(conn);
+            return (bool) dt.Rows[0][0];
+        }
+
+        public static bool XoaBan(int idBan)
+        {
+            string sTruyVan = string.Format(
+                @"DELETE FROM ban WHERE id={0}"
+                , idBan);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            sTruyVan = @"DECLARE
+	            @gtMoi INT 
+	            SELECT @gtMoi = MAX(id) FROM Ban;
+	            DBCC CHECKIDENT ('ban', RESEED, @gtMoi)";
+            DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
     }
 }

@@ -62,6 +62,7 @@
             this.tabPageBaoCao = new System.Windows.Forms.TabPage();
             this.rpBCTK = new Microsoft.Reporting.WinForms.ReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbBCTK = new System.Windows.Forms.ComboBox();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.rbtnToDate = new System.Windows.Forms.RadioButton();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
@@ -76,7 +77,7 @@
             this.btnThemBan = new System.Windows.Forms.Button();
             this.lblHello = new System.Windows.Forms.Label();
             this.linkLabelDangXuat = new System.Windows.Forms.LinkLabel();
-            this.cbBCTK = new System.Windows.Forms.ComboBox();
+            this.btnLocBanTrong = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.panelButton.SuspendLayout();
@@ -127,6 +128,7 @@
             // 
             // panelButton
             // 
+            this.panelButton.Controls.Add(this.btnLocBanTrong);
             this.panelButton.Controls.Add(this.btnThoat);
             this.panelButton.Controls.Add(this.btnGopBan);
             this.panelButton.Controls.Add(this.btnChuyenBan);
@@ -147,7 +149,7 @@
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(21, 386);
+            this.btnThoat.Location = new System.Drawing.Point(198, 381);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(156, 40);
             this.btnThoat.TabIndex = 22;
@@ -483,6 +485,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Báo cáo";
             // 
+            // cbBCTK
+            // 
+            this.cbBCTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBCTK.FormattingEnabled = true;
+            this.cbBCTK.Items.AddRange(new object[] {
+            "Hóa đơn",
+            "Đồ uống"});
+            this.cbBCTK.Location = new System.Drawing.Point(76, 0);
+            this.cbBCTK.Name = "cbBCTK";
+            this.cbBCTK.Size = new System.Drawing.Size(160, 33);
+            this.cbBCTK.TabIndex = 6;
+            // 
             // dtpToDate
             // 
             this.dtpToDate.CustomFormat = "dd/MM/yyyy";
@@ -638,17 +652,16 @@
             this.linkLabelDangXuat.Text = "Đăng xuất";
             this.linkLabelDangXuat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDangXuat_LinkClicked);
             // 
-            // cbBCTK
+            // btnLocBanTrong
             // 
-            this.cbBCTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbBCTK.FormattingEnabled = true;
-            this.cbBCTK.Items.AddRange(new object[] {
-            "Hóa đơn",
-            "Đồ uống"});
-            this.cbBCTK.Location = new System.Drawing.Point(76, 0);
-            this.cbBCTK.Name = "cbBCTK";
-            this.cbBCTK.Size = new System.Drawing.Size(160, 33);
-            this.cbBCTK.TabIndex = 6;
+            this.btnLocBanTrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocBanTrong.Location = new System.Drawing.Point(21, 381);
+            this.btnLocBanTrong.Name = "btnLocBanTrong";
+            this.btnLocBanTrong.Size = new System.Drawing.Size(156, 40);
+            this.btnLocBanTrong.TabIndex = 23;
+            this.btnLocBanTrong.Text = "Bàn trống";
+            this.btnLocBanTrong.UseVisualStyleBackColor = true;
+            this.btnLocBanTrong.Click += new System.EventHandler(this.btnLocBanTrong_Click);
             // 
             // Form_Main
             // 
@@ -732,5 +745,6 @@
         private System.Windows.Forms.Label label6;
         private Microsoft.Reporting.WinForms.ReportViewer rpBCTK;
         private System.Windows.Forms.ComboBox cbBCTK;
+        private System.Windows.Forms.Button btnLocBanTrong;
     }
 }

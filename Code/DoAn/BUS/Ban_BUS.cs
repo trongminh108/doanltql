@@ -24,5 +24,20 @@ namespace BUS
         {
             return Ban_DAO.LayBanCoNguoiKhongCoHD();
         }
+
+        public static bool ThemBan()
+        {
+            return Ban_DAO.ThemBan();
+        }
+
+        public static bool LayTinhTrangBan(int idBan)
+        {
+            return Ban_DAO.LayTinhTrang(idBan);
+        }
+
+        public static bool XoaBan(int idBan)
+        {
+            return Ban_DAO.XoaBan(idBan);
+        }
     }
 }

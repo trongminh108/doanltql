@@ -26,8 +26,8 @@ namespace DTO
 
         public int Id { get => id; set => id = value; }
         public int IdTable { get => idTable; set => idTable = value; }
-        public bool Status { get => status; set => status = value; }
         public DateTime Thoigianlap { get => thoigianlap; set => thoigianlap = value; }
+        public bool Status { get => status; set => status = value; }
         public int Tongtien { get => tongtien; set => tongtien = value; }
     }
 }

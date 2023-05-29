@@ -97,10 +97,19 @@ INSERT INTO ThongTinHoaDon VALUES
 --WHERE hd.tinhtrang=0 AND hd.idBan=3;
 
 -- lấy số lượng đồ uống
-SELECT DU.id AS IDDoUong, DU.ten AS TenDoUong, SUM(THD.soLuong) AS SoLuong, DU.gia AS DonGia
-FROM DoUong DU
-INNER JOIN ThongTinHoaDon THD ON DU.id = THD.idDoUong
-INNER JOIN HoaDon HD ON HD.id = THD.idHoaDon
-WHERE HD.thoigianlap >= '5-28-2023' AND HD.thoigianlap <= GETDATE()
-GROUP BY DU.id, DU.ten, DU.gia
-ORDER BY SoLuong 
+--SELECT DU.id AS IDDoUong, DU.ten AS TenDoUong, SUM(THD.soLuong) AS SoLuong, DU.gia AS DonGia
+--FROM DoUong DU
+--INNER JOIN ThongTinHoaDon THD ON DU.id = THD.idDoUong
+--INNER JOIN HoaDon HD ON HD.id = THD.idHoaDon
+--WHERE HD.thoigianlap >= '5-28-2023' AND HD.thoigianlap <= GETDATE()
+--GROUP BY DU.id, DU.ten, DU.gia
+--ORDER BY SoLuong 
+
+--SELECT IDENT_CURRENT('douong') AS CurrentIdentityValue;
+--SELECT MAX(id) FROM ThongTinHoaDon;
+--DECLARE
+--	@gtMoi INT 
+--	SELECT @gtMoi = MAX(id) FROM Ban;
+--	DBCC CHECKIDENT ('ban', RESEED, @gtMoi);
+
+

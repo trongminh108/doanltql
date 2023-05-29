@@ -39,11 +39,6 @@ namespace GUI
                 col.Width = (int)(widths[i] * width);
                 i += 1;
             }
-            i = 0;
-            foreach (DataGridViewRow row in dgvTU.Rows)
-            {
-                row.Cells[0].Value = ++i;
-            }
         }
 
         public void HienThiDoUong()

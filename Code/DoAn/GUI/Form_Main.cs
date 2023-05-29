@@ -24,6 +24,7 @@ namespace GUI
         int idDoUongCu = -1;
         List<Ban_DTO> lstBan;
         List<ChiTietHoaDon_DTO> lstCTHD;
+        bool isAll = true;
 
         public Form_Main(TaiKhoan_DTO tk)
         {
@@ -74,6 +75,8 @@ namespace GUI
                 }
                 fpnDanhSachBan.Controls.Add(btn);
             }
+            isAll = true;
+            btnLocBanTrong.Text = "Bàn trống";
         }
 
         public void HienThiChiTietHoaDon(int idHD)
@@ -153,7 +156,14 @@ namespace GUI
             idBan = ((sender as Button).Tag as Ban_DTO).Id;
             idHoaDon = HoaDon_BUS.LayIDHoaDon(idBan);
             lblIdBan.Text = idBan + "";
-            if (idHoaDon == -1 && (sender as Button).BackColor==Color.Aqua)
+            foreach (Control control in fpnDanhSachBan.Controls)
+            {
+                (control as Button).BackColor = Color.White;
+                if (((control as Button).Tag as Ban_DTO).Status)
+                    control.BackColor = Color.Aqua;
+            }
+            (sender as Button).BackColor = Color.Yellow;
+            if (idHoaDon == -1 && ((sender as Button).Tag as Ban_DTO).Status)
             {
                 btnThem.Enabled = false;
             }
@@ -479,6 +489,33 @@ namespace GUI
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             Form_DangNhap.isExit = true;
+        }
+
+        private void btnLocBanTrong_Click(object sender, EventArgs e)
+        {
+            if (isAll)
+            {
+                btnLocBanTrong.Text = "Tất cả bàn";
+                fpnDanhSachBan.Controls.Clear();
+                lstBan = Ban_BUS.LayBan();
+                foreach (Ban_DTO ban in lstBan)
+                {
+                    if (!ban.Status)
+                    {
+                        string status = ban.Status ? "Có người" : "Trống";
+                        Button btn = new Button() { Width = tableWidth, Height = tableHeight };
+                        btn.Text = "Bàn " + ban.Id + Environment.NewLine + status;
+                        btn.Tag = ban;
+                        btn.Click += new System.EventHandler(this.btnBan_Click);
+                        fpnDanhSachBan.Controls.Add(btn);
+                    }
+                }
+                isAll = false;
+            }
+            else 
+            {
+                HienThiBan();
+            }
         }
     }
 }

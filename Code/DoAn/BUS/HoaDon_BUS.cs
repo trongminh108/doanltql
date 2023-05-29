@@ -39,5 +39,10 @@ namespace BUS
         {
             return HoaDon_DAO.LayHoaDonTuNgay(from, to);
         }
+
+        public static List<HoaDon_DTO> LayHoaDon(int idBan)
+        {
+            return HoaDon_DAO.LayHoaDon(idBan);
+        }
     }
 }

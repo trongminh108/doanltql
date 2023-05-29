@@ -106,10 +106,11 @@ namespace DAO
         public static bool XoaDoUong(int idDoUong)
         {
             string sTruyVan = string.Format(
-                @"DELETE FROM douong WHERE id={0}",
+                @"DELETE FROM douong WHERE id='{0}'",
                 idDoUong);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.CapNhatIndentity("douong", conn);
             DataProvider.DongKetNoi(conn);
             return kq;
         }

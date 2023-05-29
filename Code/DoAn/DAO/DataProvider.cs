@@ -59,5 +59,16 @@ namespace DAO
                 return false;
             }
         }
+
+        public static void CapNhatIndentity(string table, SqlConnection conn)
+        {
+            string sTruyVan = string.Format(@"
+                DECLARE
+	            @gtMoi INT 
+	            SELECT @gtMoi = MAX(id) FROM {0};
+	            DBCC CHECKIDENT ('{1}', RESEED, @gtMoi);
+            ", table, table);
+            TruyVanKhongLayDuLieu(sTruyVan, conn);
+        }
     }
 }
