@@ -15,6 +15,11 @@ namespace BUS
             return Ban_DAO.LayBan();
         }
 
+        public static Ban_DTO LayBan(int idBan)
+        {
+            return Ban_DAO.LayBan(idBan);
+        }
+
         public static bool ThanhToanBan(int id, int tinhtrang)
         {
             return Ban_DAO.ThanhToanBan(id, tinhtrang);

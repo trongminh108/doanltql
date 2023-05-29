@@ -19,7 +19,7 @@ namespace GUI
         int idBanChuyen = -1;
         List<Ban_DTO> lstBan;
         int currentID = -1;
-        bool duocChuyen = false;
+        
         public Form_ChuyenBan(int id)
         {
             InitializeComponent();
@@ -49,6 +49,7 @@ namespace GUI
 
                 fpnDanhSachBan.Controls.Add(btn);
             }
+            
         }
 
         private void btnBan_Click(object sender, EventArgs e)
@@ -70,8 +71,17 @@ namespace GUI
             }
             else
             {
-                lblChuyenBan.Text = "";
-                btnChuyen.Enabled = false;
+                if (currentID == idBanChuyen)
+                {
+                    lblChuyenBan.Text = "";
+                    btnChuyen.Enabled = false;
+                }
+                else
+                {
+                    (sender as Button).BackColor = Color.Red;
+                    lblChuyenBan.Text = "Chuyển từ bàn " + idBanChuyen + " đến bàn " + currentID;
+                    btnChuyen.Enabled = true;
+                }
             }
         }
 
@@ -87,13 +97,39 @@ namespace GUI
 
         private void btnChuyen_Click(object sender, EventArgs e)
         {
-            int idHD = HoaDon_BUS.LayIDHoaDon(idBanChuyen);
-            HoaDon_BUS.ChuyenBan(idHD, currentID);
-            Ban_BUS.ThanhToanBan(idBanChuyen, 0);
-            Ban_BUS.ThanhToanBan(currentID, 1);
-            MessageBox.Show("Đã chuyển từ bàn " + idBanChuyen + " đến bàn " + currentID, "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            Ban_DTO banHienTai = Ban_BUS.LayBan(currentID);
+            if (idBanChuyen != currentID && !banHienTai.Status)
+            {
+                int idHD = HoaDon_BUS.LayIDHoaDon(idBanChuyen);
+                HoaDon_BUS.ChuyenBan(idHD, currentID);
+                Ban_BUS.ThanhToanBan(idBanChuyen, 0);
+                Ban_BUS.ThanhToanBan(currentID, 1);
+                MessageBox.Show("Đã chuyển từ bàn " + idBanChuyen + " đến bàn " + currentID, "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+            {
+                DialogResult answer = MessageBox.Show(
+                    "Bàn này đã có người ngồi, bạn có muốn chuyển?",
+                    "Thông báo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    int idHDBanGoc = HoaDon_BUS.LayIDHoaDon(idBanChuyen);
+                    int idHDBanDich = HoaDon_BUS.LayIDHoaDon(currentID);
+                    List<ThongTinHoaDon_DTO> lstHDGoc = ThongTinHoaDon_BUS.LayThongTinHoaDon(idHDBanGoc);
+                    foreach (ThongTinHoaDon_DTO tthd in lstHDGoc)
+                    {
+                        tthd.IdBill = idHDBanDich;
+                        ThongTinHoaDon_BUS.ThemThongTinHoaDon(tthd);
+                    }
+                    HoaDon_BUS.XoaHoaDon(idHDBanGoc);
+                    Ban_BUS.ThanhToanBan(idBanChuyen, 0);
+                    this.Close();
+                }
+            }
         }
     }
 }

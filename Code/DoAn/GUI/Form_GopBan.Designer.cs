@@ -97,8 +97,8 @@
             this.Controls.Add(this.fpnDanhSachBan);
             this.Name = "Form_GopBan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Chuyển bàn";
-            this.Load += new System.EventHandler(this.Form_ChuyenBan_Load);
+            this.Text = "Gộp bàn";
+            this.Load += new System.EventHandler(this.Form_GopBan_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

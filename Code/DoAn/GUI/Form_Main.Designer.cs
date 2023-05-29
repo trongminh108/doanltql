@@ -33,6 +33,7 @@
             this.tabHome = new System.Windows.Forms.TabPage();
             this.fpnDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
             this.panelButton = new System.Windows.Forms.Panel();
+            this.btnLocBanTrong = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnGopBan = new System.Windows.Forms.Button();
             this.btnChuyenBan = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@
             this.btnThemBan = new System.Windows.Forms.Button();
             this.lblHello = new System.Windows.Forms.Label();
             this.linkLabelDangXuat = new System.Windows.Forms.LinkLabel();
-            this.btnLocBanTrong = new System.Windows.Forms.Button();
+            this.linkLabelDoiMatKhau = new System.Windows.Forms.LinkLabel();
             this.tabControl.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.panelButton.SuspendLayout();
@@ -120,6 +121,7 @@
             // 
             this.fpnDanhSachBan.AutoScroll = true;
             this.fpnDanhSachBan.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fpnDanhSachBan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.fpnDanhSachBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fpnDanhSachBan.Location = new System.Drawing.Point(0, 3);
             this.fpnDanhSachBan.Name = "fpnDanhSachBan";
@@ -145,6 +147,17 @@
             this.panelButton.Name = "panelButton";
             this.panelButton.Size = new System.Drawing.Size(368, 460);
             this.panelButton.TabIndex = 1;
+            // 
+            // btnLocBanTrong
+            // 
+            this.btnLocBanTrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocBanTrong.Location = new System.Drawing.Point(21, 381);
+            this.btnLocBanTrong.Name = "btnLocBanTrong";
+            this.btnLocBanTrong.Size = new System.Drawing.Size(156, 40);
+            this.btnLocBanTrong.TabIndex = 23;
+            this.btnLocBanTrong.Text = "Bàn trống";
+            this.btnLocBanTrong.UseVisualStyleBackColor = true;
+            this.btnLocBanTrong.Click += new System.EventHandler(this.btnLocBanTrong_Click);
             // 
             // btnThoat
             // 
@@ -652,22 +665,26 @@
             this.linkLabelDangXuat.Text = "Đăng xuất";
             this.linkLabelDangXuat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDangXuat_LinkClicked);
             // 
-            // btnLocBanTrong
+            // linkLabelDoiMatKhau
             // 
-            this.btnLocBanTrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocBanTrong.Location = new System.Drawing.Point(21, 381);
-            this.btnLocBanTrong.Name = "btnLocBanTrong";
-            this.btnLocBanTrong.Size = new System.Drawing.Size(156, 40);
-            this.btnLocBanTrong.TabIndex = 23;
-            this.btnLocBanTrong.Text = "Bàn trống";
-            this.btnLocBanTrong.UseVisualStyleBackColor = true;
-            this.btnLocBanTrong.Click += new System.EventHandler(this.btnLocBanTrong_Click);
+            this.linkLabelDoiMatKhau.AutoSize = true;
+            this.linkLabelDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelDoiMatKhau.Location = new System.Drawing.Point(541, 9);
+            this.linkLabelDoiMatKhau.Name = "linkLabelDoiMatKhau";
+            this.linkLabelDoiMatKhau.Size = new System.Drawing.Size(138, 25);
+            this.linkLabelDoiMatKhau.TabIndex = 11;
+            this.linkLabelDoiMatKhau.TabStop = true;
+            this.linkLabelDoiMatKhau.Text = "Đổi mật khẩu";
+            this.linkLabelDoiMatKhau.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDoiMatKhau_LinkClicked);
             // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GUI.Properties.Resources.logqlcafe;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 561);
+            this.Controls.Add(this.linkLabelDoiMatKhau);
             this.Controls.Add(this.linkLabelDangXuat);
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.tabControl);
@@ -746,5 +763,6 @@
         private Microsoft.Reporting.WinForms.ReportViewer rpBCTK;
         private System.Windows.Forms.ComboBox cbBCTK;
         private System.Windows.Forms.Button btnLocBanTrong;
+        private System.Windows.Forms.LinkLabel linkLabelDoiMatKhau;
     }
 }

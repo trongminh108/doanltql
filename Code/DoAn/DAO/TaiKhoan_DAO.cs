@@ -118,5 +118,18 @@ namespace DAO
             DataProvider.DongKetNoi(conn);
             return kq;
         }
+
+        public static bool CapNhatTaiKhoanCoMK(string tenCu, TaiKhoan_DTO tkMoi)
+        {
+            string sTruyVan = string.Format(
+                @"UPDATE TaiKhoan 
+                SET tendangnhap=N'{0}', matkhau=N'{1}', tenhienthi=N'{2}', loai={3}
+                WHERE tendangnhap=N'{4}'",
+                tkMoi.Username, tkMoi.Password, tkMoi.DisplayName, tkMoi.Type, tenCu);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
+            return kq;
+        }
     }
 }

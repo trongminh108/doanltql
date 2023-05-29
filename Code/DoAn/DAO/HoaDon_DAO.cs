@@ -63,13 +63,7 @@ namespace DAO
                 idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
-            sTruyVan = @"
-                DECLARE
-	            @gtMoi INT 
-	            SELECT @gtMoi = MAX(id) FROM hoadon;
-	            DBCC CHECKIDENT ('hoadon', RESEED, @gtMoi);
-            ";
-            DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.CapNhatIndentity("hoadon", conn);
             DataProvider.DongKetNoi(conn);
             return kq;
         }

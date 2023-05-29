@@ -81,14 +81,12 @@ INSERT INTO ThongTinHoaDon VALUES
 	(1, 1, 2),
 	(1, 2, 2);
 
---UPDATE HoaDon SET tinhtrang=0 WHERE id=1; 
---UPDATE Ban SET tinhtrang=0 WHERE id=1; 
---DELETE FROM HoaDon WHERE id=2;
 --SELECT * FROM HoaDon
 --SELECT * FROM ThongTinHoaDon
 --SELECT * FROM Ban
 --SELECT * FROM DoUong
 --SELECT * FROM TaiKhoan
+
 
 --SELECT tthd.id, hd.thoigianlap, du.ten, tthd.soLuong, du.gia
 --FROM ThongTinHoaDon tthd
@@ -107,9 +105,14 @@ INSERT INTO ThongTinHoaDon VALUES
 
 --SELECT IDENT_CURRENT('douong') AS CurrentIdentityValue;
 --SELECT MAX(id) FROM ThongTinHoaDon;
+
+UPDATE Ban SET tinhtrang=0 WHERE id=4
 --DECLARE
 --	@gtMoi INT 
 --	SELECT @gtMoi = MAX(id) FROM Ban;
 --	DBCC CHECKIDENT ('ban', RESEED, @gtMoi);
+
+
+
 
 

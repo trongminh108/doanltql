@@ -88,5 +88,22 @@ namespace BUS
             }
             return TaiKhoan_DAO.CapNhatTaiKhoanKoMK(tenCu, tk);
         }
+
+        public static bool CapNhatTaiKhoanCoMK(string tenCu, TaiKhoan_DTO tkMoi)
+        {
+            if (tkMoi.Username.Trim() == "" ||
+                tkMoi.DisplayName == "" || tkMoi.Password.Trim()=="")
+            {
+                MessageBox.Show(
+                    "Tên đăng nhập, mật khẩu và tên hiển thị không được trống!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return false;
+            }
+            MD5 md5Hash = MD5.Create();
+            tkMoi.Password = Functions.GetMd5Hash(md5Hash, tkMoi.Password);
+            return TaiKhoan_DAO.CapNhatTaiKhoanCoMK(tenCu, tkMoi);
+        }
     }
 }

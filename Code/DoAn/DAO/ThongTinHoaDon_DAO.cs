@@ -100,13 +100,7 @@ namespace DAO
             ", idCTHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
-            sTruyVan = @"
-                DECLARE
-	            @gtMoi INT 
-	            SELECT @gtMoi = MAX(id) FROM thongtinhoadon;
-	            DBCC CHECKIDENT ('thongtinhoadon', RESEED, @gtMoi);
-            ";
-            DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.CapNhatIndentity("thongtinhoadon", conn);
             DataProvider.DongKetNoi(conn);
             return kq;
         }

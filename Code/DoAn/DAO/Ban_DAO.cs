@@ -33,6 +33,22 @@ namespace DAO
             return lst;
         }
 
+        public static Ban_DTO LayBan(int id)
+        {
+            string sTruyVan = string.Format(@"select * from ban where id={0}", id);
+            SqlConnection conn = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            if (dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            
+            Ban_DTO ban = new Ban_DTO();
+            ban.Id = int.Parse(dt.Rows[0]["id"].ToString());
+            ban.Status = bool.Parse(dt.Rows[0]["tinhtrang"] + "");
+            return ban;
+        }
+
         public static bool ThanhToanBan(int id, int tinhtrang)
         {
             string sTruyVan = string.Format(@"update ban set tinhtrang='{0}' where id='{1}'", tinhtrang, id);
@@ -50,6 +66,7 @@ namespace DAO
                 WHERE b.tinhtrang=1 AND b.id NOT IN (
 	                SELECT hd.idBan
 	                FROM HoaDon hd	
+                    WHERE tinhtrang=0
                 )"
             );
             SqlConnection conn = DataProvider.MoKetNoi();
@@ -107,11 +124,7 @@ namespace DAO
                 , idBan);
             SqlConnection conn = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
-            sTruyVan = @"DECLARE
-	            @gtMoi INT 
-	            SELECT @gtMoi = MAX(id) FROM Ban;
-	            DBCC CHECKIDENT ('ban', RESEED, @gtMoi)";
-            DataProvider.TruyVanKhongLayDuLieu(sTruyVan, conn);
+            DataProvider.CapNhatIndentity("ban", conn);
             DataProvider.DongKetNoi(conn);
             return kq;
         }

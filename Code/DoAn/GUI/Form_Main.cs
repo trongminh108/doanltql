@@ -25,6 +25,7 @@ namespace GUI
         List<Ban_DTO> lstBan;
         List<ChiTietHoaDon_DTO> lstCTHD;
         bool isAll = true;
+        List<List<int>> lstBanGop = new List<List<int>>();
 
         public Form_Main(TaiKhoan_DTO tk)
         {
@@ -74,6 +75,19 @@ namespace GUI
                     btn.Font = new Font(btn.Font, FontStyle.Bold);
                 }
                 fpnDanhSachBan.Controls.Add(btn);
+                if (lstBanGop.Count != 0)
+                {
+                    for (int i = 0; i < lstBanGop.Count; i++)
+                    {
+                        List<int> cap = lstBanGop[i];
+                        if (cap[1] == ban.Id)
+                        {
+                            btn.Text = "Bàn " + ban.Id
+                                + Environment.NewLine + "Gộp với " + cap[0];
+                            btn.BackColor = Color.LimeGreen;
+                        }
+                    }
+                }
             }
             isAll = true;
             btnLocBanTrong.Text = "Bàn trống";
@@ -119,7 +133,7 @@ namespace GUI
                 id = int.Parse(cbDoUong.SelectedValue.ToString());
                 lblHomeGia.Text = "Giá: " + DoUong_BUS.getGia(id) * nudSoLuong.Value + "vnđ";
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -161,6 +175,21 @@ namespace GUI
                 (control as Button).BackColor = Color.White;
                 if (((control as Button).Tag as Ban_DTO).Status)
                     control.BackColor = Color.Aqua;
+                Button btn = (Button)control;
+                Ban_DTO ban = btn.Tag as Ban_DTO;
+                if (lstBanGop.Count != 0)
+                {
+                    for (int i = 0; i < lstBanGop.Count; i++)
+                    {
+                        List<int> cap = lstBanGop[i];
+                        if (cap[1] == ban.Id)
+                        {
+                            btn.Text = "Bàn " + ban.Id
+                                + Environment.NewLine + "Gộp với " + cap[0];
+                            btn.BackColor = Color.LimeGreen;
+                        }
+                    }
+                }
             }
             (sender as Button).BackColor = Color.Yellow;
             if (idHoaDon == -1 && ((sender as Button).Tag as Ban_DTO).Status)
@@ -233,15 +262,35 @@ namespace GUI
                     lstInCTHD.Add(new InCTHD(idHoaDon, billDate, idBan, cthd));
                 }
                 new Form_ChiTietHoaDon(lstInCTHD).ShowDialog();
+                FormQRCode.text = 
+                    "Thanh toán: " + 
+                    Functions.TinhTongTien(lstCTHD).ToString("#,###") + "vnđ"
+                    +  "\nChân thành cảm ơn quý khách!";
+                new FormQRCode().Show();
                 HoaDon_BUS.ThanhToanHoaDon(idHoaDon, Functions.TinhTongTien(lstCTHD), billDate);
                 Ban_BUS.ThanhToanBan(idBan, 0);
                 tabControl.SelectedIndex = 0;
-                List<Ban_DTO> lstBanKhongHD = Ban_BUS.LayBanCoNguoiKhongCoHD();
-                if (lstBanKhongHD != null)
-                    foreach(Ban_DTO ban in lstBanKhongHD)
+                if (lstBanGop.Count != 0)
+                {
+                    for (int i = 0; i < lstBanGop.Count; i++)
                     {
-                        Ban_BUS.ThanhToanBan(ban.Id, 0);
+                        List<int> cap = lstBanGop[i];
+                        if (cap[0] == idBan)
+                        {
+                            Ban_BUS.ThanhToanBan(cap[1], 0);
+                            lstBanGop.Remove(cap);
+                        }
                     }
+                }
+                else
+                {
+                    List<Ban_DTO> lstBanKhongHD = Ban_BUS.LayBanCoNguoiKhongCoHD();
+                    if (lstBanKhongHD != null)
+                        foreach (Ban_DTO ban in lstBanKhongHD)
+                        {
+                            Ban_BUS.ThanhToanBan(ban.Id, 0);
+                        }
+                }
                 HienThiBan();
             }            
         }
@@ -394,6 +443,10 @@ namespace GUI
             {
                 new Form_GopBan(idBan).ShowDialog();
                 HienThiBan();
+                if (Form_GopBan.IDres!=-1)
+                    lstBanGop.Add(new List<int> { Form_GopBan.IDres, idBan });
+                Form_GopBan.IDres = -1;
+                HienThiBan();
             }
             else
                 MessageBox.Show("Bàn này đang trống, không cần gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -516,6 +569,11 @@ namespace GUI
             {
                 HienThiBan();
             }
+        }
+
+        private void linkLabelDoiMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new Form_ThietLapTaiKhoan(tk).ShowDialog();
         }
     }
 }

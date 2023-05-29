@@ -19,6 +19,7 @@ namespace GUI
         int idBanGoc = -1;
         List<Ban_DTO> lstBan;
         int currentID = -1;
+        public static int IDres = -1;
         public Form_GopBan(int id)
         {
             InitializeComponent();
@@ -82,7 +83,7 @@ namespace GUI
             }
         }
 
-        private void Form_ChuyenBan_Load(object sender, EventArgs e)
+        private void Form_GopBan_Load(object sender, EventArgs e)
         {
             HienThiBan();
         }
@@ -111,6 +112,7 @@ namespace GUI
                 }
                 HoaDon_BUS.XoaHoaDon(idHDBanGoc);
                 //Ban_BUS.ThanhToanBan(idBanGoc, 0);
+                IDres = currentID;
                 this.Close();
             }
         }
