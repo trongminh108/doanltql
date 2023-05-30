@@ -17,6 +17,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select * from ban");
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -29,7 +30,6 @@ namespace DAO
                 ban.Status = bool.Parse(dt.Rows[i]["tinhtrang"]+"");
                 lst.Add(ban);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
 
@@ -38,6 +38,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select * from ban where id={0}", id);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -71,6 +72,7 @@ namespace DAO
             );
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -83,7 +85,6 @@ namespace DAO
                 ban.Status = bool.Parse(dt.Rows[i]["tinhtrang"] + "");
                 lst.Add(ban);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
 
@@ -109,11 +110,11 @@ namespace DAO
                 , idBan);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return false;
             }
-            DataProvider.DongKetNoi(conn);
             return (bool) dt.Rows[0][0];
         }
 

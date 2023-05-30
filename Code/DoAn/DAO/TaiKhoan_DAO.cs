@@ -20,6 +20,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select * from taikhoan where tendangnhap=N'{0}' and matkhau='{1}'", ten, matkhau);
             SqlConnection con = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -30,7 +31,6 @@ namespace DAO
             tk.DisplayName = dt.Rows[0]["tenhienthi"].ToString();
             tk.Type = int.Parse(dt.Rows[0]["loai"].ToString());
 
-            DataProvider.DongKetNoi(con);
             return tk;
         }
 
@@ -40,6 +40,7 @@ namespace DAO
                 @"select * from taikhoan");
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -54,7 +55,6 @@ namespace DAO
                 temp.Type = int.Parse(dt.Rows[i][3].ToString());
                 lst.Add(temp);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
 
@@ -65,6 +65,7 @@ namespace DAO
                 tenTK);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -79,7 +80,6 @@ namespace DAO
                 temp.Type = int.Parse(dt.Rows[i][3].ToString());
                 lst.Add(temp);
             }
-            DataProvider.DongKetNoi(conn);
             return lst[0];
         }
 

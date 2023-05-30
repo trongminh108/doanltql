@@ -17,6 +17,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select * from douong");
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -30,7 +31,6 @@ namespace DAO
                 du.Price = int.Parse(dt.Rows[i]["gia"].ToString());
                 lstDoUong.Add(du);
             }
-            DataProvider.DongKetNoi(conn);
             return lstDoUong;
         }
 
@@ -43,6 +43,7 @@ namespace DAO
             );
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -56,7 +57,6 @@ namespace DAO
                 du.Price = int.Parse(dt.Rows[i]["gia"].ToString());
                 lstDoUong.Add(du);
             }
-            DataProvider.DongKetNoi(conn);
             return lstDoUong;
         }
 
@@ -65,6 +65,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select gia from douong where id={0}", id);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return -1;
@@ -77,6 +78,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select id from douong where ten=N'{0}'", ten);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return -1;
@@ -128,6 +130,7 @@ namespace DAO
             );
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -142,7 +145,6 @@ namespace DAO
                 du.SoLuong = int.Parse(dt.Rows[i][3].ToString());
                 lstDoUong.Add(du);
             }
-            DataProvider.DongKetNoi(conn);
             return lstDoUong;
         }
     }

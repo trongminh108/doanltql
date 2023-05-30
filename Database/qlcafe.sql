@@ -76,12 +76,15 @@ UPDATE Ban SET tinhtrang=1 WHERE id = 3;
 --insert HoaDon
 INSERT INTO HoaDon VALUES (3, NULL, 0, 0);
 
+INSERT INTO HoaDon VALUES (3, '5-28-2023', 1, 15000);
+INSERT INTO ThongTinHoaDon VALUEs (34, 10, 1);
+
 --insert ThongTinHoaDon
 INSERT INTO ThongTinHoaDon VALUES
 	(1, 1, 2),
 	(1, 2, 2);
 
---SELECT * FROM HoaDon
+--/SELECT * FROM HoaDon
 --SELECT * FROM ThongTinHoaDon
 --SELECT * FROM Ban
 --SELECT * FROM DoUong
@@ -106,11 +109,20 @@ INSERT INTO ThongTinHoaDon VALUES
 --SELECT IDENT_CURRENT('douong') AS CurrentIdentityValue;
 --SELECT MAX(id) FROM ThongTinHoaDon;
 
-UPDATE Ban SET tinhtrang=0 WHERE id=4
 --DECLARE
 --	@gtMoi INT 
 --	SELECT @gtMoi = MAX(id) FROM Ban;
 --	DBCC CHECKIDENT ('ban', RESEED, @gtMoi);
+
+--BACKUP DATABASE qlcafe
+--TO DISK = 'E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Database\qlcafe.bak'
+--WITH INIT, COMPRESSION;
+
+--RESTORE DATABASE qlcafe
+--FROM DISK = 'E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Database\qlcafe(30_5_2023_14_55).bak'
+--WITH REPLACE, RECOVERY;
+
+
 
 
 

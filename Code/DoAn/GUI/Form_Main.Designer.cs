@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.fpnDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
             this.panelButton = new System.Windows.Forms.Panel();
+            this.btnChonMon = new System.Windows.Forms.Button();
             this.btnLocBanTrong = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnGopBan = new System.Windows.Forms.Button();
@@ -77,8 +79,12 @@
             this.btnQuanLyDoUong = new System.Windows.Forms.Button();
             this.btnThemBan = new System.Windows.Forms.Button();
             this.lblHello = new System.Windows.Forms.Label();
-            this.linkLabelDangXuat = new System.Windows.Forms.LinkLabel();
-            this.linkLabelDoiMatKhau = new System.Windows.Forms.LinkLabel();
+            this.linkLabelSetting = new System.Windows.Forms.LinkLabel();
+            this.contextMenuStripSetting = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.thietLapTaiKhoanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dangXuatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saoLuutoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.khoiPhucToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.panelButton.SuspendLayout();
@@ -89,6 +95,7 @@
             this.tabPageBaoCao.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPageQuanLy.SuspendLayout();
+            this.contextMenuStripSetting.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -130,6 +137,7 @@
             // 
             // panelButton
             // 
+            this.panelButton.Controls.Add(this.btnChonMon);
             this.panelButton.Controls.Add(this.btnLocBanTrong);
             this.panelButton.Controls.Add(this.btnThoat);
             this.panelButton.Controls.Add(this.btnGopBan);
@@ -148,10 +156,21 @@
             this.panelButton.Size = new System.Drawing.Size(368, 460);
             this.panelButton.TabIndex = 1;
             // 
+            // btnChonMon
+            // 
+            this.btnChonMon.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChonMon.Location = new System.Drawing.Point(21, 217);
+            this.btnChonMon.Name = "btnChonMon";
+            this.btnChonMon.Size = new System.Drawing.Size(333, 40);
+            this.btnChonMon.TabIndex = 24;
+            this.btnChonMon.Text = "Chọn món";
+            this.btnChonMon.UseVisualStyleBackColor = true;
+            this.btnChonMon.Click += new System.EventHandler(this.btnChonMon_Click);
+            // 
             // btnLocBanTrong
             // 
             this.btnLocBanTrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocBanTrong.Location = new System.Drawing.Point(21, 381);
+            this.btnLocBanTrong.Location = new System.Drawing.Point(21, 396);
             this.btnLocBanTrong.Name = "btnLocBanTrong";
             this.btnLocBanTrong.Size = new System.Drawing.Size(156, 40);
             this.btnLocBanTrong.TabIndex = 23;
@@ -162,7 +181,7 @@
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(198, 381);
+            this.btnThoat.Location = new System.Drawing.Point(198, 396);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(156, 40);
             this.btnThoat.TabIndex = 22;
@@ -173,7 +192,7 @@
             // btnGopBan
             // 
             this.btnGopBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGopBan.Location = new System.Drawing.Point(198, 315);
+            this.btnGopBan.Location = new System.Drawing.Point(198, 330);
             this.btnGopBan.Name = "btnGopBan";
             this.btnGopBan.Size = new System.Drawing.Size(156, 40);
             this.btnGopBan.TabIndex = 21;
@@ -184,7 +203,7 @@
             // btnChuyenBan
             // 
             this.btnChuyenBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChuyenBan.Location = new System.Drawing.Point(21, 315);
+            this.btnChuyenBan.Location = new System.Drawing.Point(21, 330);
             this.btnChuyenBan.Name = "btnChuyenBan";
             this.btnChuyenBan.Size = new System.Drawing.Size(156, 40);
             this.btnChuyenBan.TabIndex = 20;
@@ -196,7 +215,7 @@
             // 
             this.lblHomeGia.AutoSize = true;
             this.lblHomeGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHomeGia.Location = new System.Drawing.Point(16, 189);
+            this.lblHomeGia.Location = new System.Drawing.Point(16, 175);
             this.lblHomeGia.Name = "lblHomeGia";
             this.lblHomeGia.Size = new System.Drawing.Size(81, 25);
             this.lblHomeGia.TabIndex = 19;
@@ -226,7 +245,7 @@
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Location = new System.Drawing.Point(21, 245);
+            this.btnThem.Location = new System.Drawing.Point(21, 273);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(156, 40);
             this.btnThem.TabIndex = 14;
@@ -237,7 +256,7 @@
             // btnHoaDon
             // 
             this.btnHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHoaDon.Location = new System.Drawing.Point(198, 245);
+            this.btnHoaDon.Location = new System.Drawing.Point(198, 273);
             this.btnHoaDon.Name = "btnHoaDon";
             this.btnHoaDon.Size = new System.Drawing.Size(156, 40);
             this.btnHoaDon.TabIndex = 13;
@@ -653,29 +672,55 @@
             this.lblHello.TabIndex = 9;
             this.lblHello.Text = "Tên đăng nhập:";
             // 
-            // linkLabelDangXuat
+            // linkLabelSetting
             // 
-            this.linkLabelDangXuat.AutoSize = true;
-            this.linkLabelDangXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelDangXuat.Location = new System.Drawing.Point(685, 9);
-            this.linkLabelDangXuat.Name = "linkLabelDangXuat";
-            this.linkLabelDangXuat.Size = new System.Drawing.Size(110, 25);
-            this.linkLabelDangXuat.TabIndex = 10;
-            this.linkLabelDangXuat.TabStop = true;
-            this.linkLabelDangXuat.Text = "Đăng xuất";
-            this.linkLabelDangXuat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDangXuat_LinkClicked);
+            this.linkLabelSetting.AutoSize = true;
+            this.linkLabelSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelSetting.Location = new System.Drawing.Point(700, 9);
+            this.linkLabelSetting.Name = "linkLabelSetting";
+            this.linkLabelSetting.Size = new System.Drawing.Size(95, 25);
+            this.linkLabelSetting.TabIndex = 12;
+            this.linkLabelSetting.TabStop = true;
+            this.linkLabelSetting.Text = "Thiết lập";
+            this.linkLabelSetting.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSetting_LinkClicked);
             // 
-            // linkLabelDoiMatKhau
+            // contextMenuStripSetting
             // 
-            this.linkLabelDoiMatKhau.AutoSize = true;
-            this.linkLabelDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelDoiMatKhau.Location = new System.Drawing.Point(541, 9);
-            this.linkLabelDoiMatKhau.Name = "linkLabelDoiMatKhau";
-            this.linkLabelDoiMatKhau.Size = new System.Drawing.Size(138, 25);
-            this.linkLabelDoiMatKhau.TabIndex = 11;
-            this.linkLabelDoiMatKhau.TabStop = true;
-            this.linkLabelDoiMatKhau.Text = "Đổi mật khẩu";
-            this.linkLabelDoiMatKhau.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDoiMatKhau_LinkClicked);
+            this.contextMenuStripSetting.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thietLapTaiKhoanToolStripMenuItem,
+            this.dangXuatToolStripMenuItem,
+            this.saoLuutoolStripMenuItem1,
+            this.khoiPhucToolStripMenuItem});
+            this.contextMenuStripSetting.Name = "contextMenuStripSetting";
+            this.contextMenuStripSetting.Size = new System.Drawing.Size(181, 114);
+            // 
+            // thietLapTaiKhoanToolStripMenuItem
+            // 
+            this.thietLapTaiKhoanToolStripMenuItem.Name = "thietLapTaiKhoanToolStripMenuItem";
+            this.thietLapTaiKhoanToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thietLapTaiKhoanToolStripMenuItem.Text = "Thiết lập tài khoản";
+            this.thietLapTaiKhoanToolStripMenuItem.Click += new System.EventHandler(this.thietLapTaiKhoanToolStripMenuItem_Click);
+            // 
+            // dangXuatToolStripMenuItem
+            // 
+            this.dangXuatToolStripMenuItem.Name = "dangXuatToolStripMenuItem";
+            this.dangXuatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dangXuatToolStripMenuItem.Text = "Đăng xuất";
+            this.dangXuatToolStripMenuItem.Click += new System.EventHandler(this.dangXuatToolStripMenuItem_Click);
+            // 
+            // saoLuutoolStripMenuItem1
+            // 
+            this.saoLuutoolStripMenuItem1.Name = "saoLuutoolStripMenuItem1";
+            this.saoLuutoolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saoLuutoolStripMenuItem1.Text = "Sao lưu";
+            this.saoLuutoolStripMenuItem1.Click += new System.EventHandler(this.saoLuutoolStripMenuItem1_Click);
+            // 
+            // khoiPhucToolStripMenuItem
+            // 
+            this.khoiPhucToolStripMenuItem.Name = "khoiPhucToolStripMenuItem";
+            this.khoiPhucToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.khoiPhucToolStripMenuItem.Text = "Khôi phục";
+            this.khoiPhucToolStripMenuItem.Click += new System.EventHandler(this.khoiPhucToolStripMenuItem_Click);
             // 
             // Form_Main
             // 
@@ -684,8 +729,7 @@
             this.BackgroundImage = global::GUI.Properties.Resources.logqlcafe;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 561);
-            this.Controls.Add(this.linkLabelDoiMatKhau);
-            this.Controls.Add(this.linkLabelDangXuat);
+            this.Controls.Add(this.linkLabelSetting);
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -707,6 +751,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPageQuanLy.ResumeLayout(false);
+            this.contextMenuStripSetting.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,7 +797,6 @@
         private System.Windows.Forms.Button btnQuanLyTaiKhoan;
         private System.Windows.Forms.Button btnQuanLyDoUong;
         private System.Windows.Forms.Button btnThemBan;
-        private System.Windows.Forms.LinkLabel linkLabelDangXuat;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dtpToDate;
         private System.Windows.Forms.RadioButton rbtnToDate;
@@ -763,6 +807,12 @@
         private Microsoft.Reporting.WinForms.ReportViewer rpBCTK;
         private System.Windows.Forms.ComboBox cbBCTK;
         private System.Windows.Forms.Button btnLocBanTrong;
-        private System.Windows.Forms.LinkLabel linkLabelDoiMatKhau;
+        private System.Windows.Forms.LinkLabel linkLabelSetting;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSetting;
+        private System.Windows.Forms.ToolStripMenuItem thietLapTaiKhoanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dangXuatToolStripMenuItem;
+        private System.Windows.Forms.Button btnChonMon;
+        private System.Windows.Forms.ToolStripMenuItem saoLuutoolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem khoiPhucToolStripMenuItem;
     }
 }

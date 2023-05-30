@@ -96,3 +96,4 @@ E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\bin\Debug\QRCoder.dll
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\obj\Debug\GUI.FormQRCode.resources
 E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\obj\Debug\GUI.Form_ThietLapTaiKhoan.resources
+E:\MinhTrongs Files\University_AGU\Semester_6\LapTrinhQuanLy\DoAn\Code\DoAn\GUI\obj\Debug\GUI.Form_ChonMon.resources

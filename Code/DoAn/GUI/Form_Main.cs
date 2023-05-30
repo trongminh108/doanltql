@@ -575,5 +575,98 @@ namespace GUI
         {
             new Form_ThietLapTaiKhoan(tk).ShowDialog();
         }
+
+        private void linkLabelSetting_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            contextMenuStripSetting.Show(linkLabelSetting, new Point(0, linkLabelSetting.Height));
+            //Point screenPoint = linkLabelSetting.PointToScreen(new Point(linkLabelSetting.Left, linkLabelSetting.Bottom));
+            //if (screenPoint.Y + contextMenuStripSetting.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
+            //{
+            //    contextMenuStripSetting.Show(linkLabelSetting, new Point(0, -contextMenuStripSetting.Size.Height));
+            //}
+            //else
+            //{
+            //    contextMenuStripSetting.Show(linkLabelSetting, new Point(0, linkLabelSetting.Height));
+            //}
+        }
+
+        private void thietLapTaiKhoanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Form_ThietLapTaiKhoan(tk).ShowDialog();
+        }
+
+        private void dangXuatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show(
+                    "Bạn có muốn đăng xuất không?",
+                    "Đăng xuất",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+                this.Close();
+            Form_DangNhap.isLogout = true;
+        }
+
+        private void btnChonMon_Click(object sender, EventArgs e)
+        {
+            new Form_ChonMon().ShowDialog();
+            if (Form_ChonMon.idMon != -1)
+                cbDoUong.SelectedValue = Form_ChonMon.idMon;
+            Form_ChonMon.idMon = -1;
+        }
+
+        private void saoLuutoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show(
+                    "Bạn có muốn sao lưu dữ liệu không?",
+                    "Thông báo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                FolderBrowserDialog saoluuFolder = new FolderBrowserDialog();
+                saoluuFolder.Description = "Chọn thư mục lưu trữ";
+                if (saoluuFolder.ShowDialog() == DialogResult.OK)
+                {
+                    string sDuongDan = saoluuFolder.SelectedPath;
+                    if (CSDL_BUS.SaoLuu(sDuongDan) == true)
+                        MessageBox.Show("Đã sao lưu dữ liệu vào " + sDuongDan);
+                    else
+                        MessageBox.Show("Thao tác không thành công");
+                }
+            }
+        }
+
+        private void khoiPhucToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show(
+                    "Dữ liệu hiện tại sau khi khôi phục sẽ bị mất,\n" +
+                    "Bạn có muốn không?",
+                    "Thông báo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                OpenFileDialog phuchoiFile = new OpenFileDialog();
+                phuchoiFile.Filter = "*.bak|*.bak";
+                phuchoiFile.Title = "Chọn tập tin phục hồi (.bak)";
+                if (phuchoiFile.ShowDialog() == DialogResult.OK &&
+               phuchoiFile.CheckFileExists == true)
+                {
+                    string sDuongDan = phuchoiFile.FileName;
+                    if (CSDL_BUS.PhucHoi(sDuongDan) == true)
+                    {
+                        MessageBox.Show(
+                        "Khôi phục thành công, vui lòng đăng nhập lại để sử dụng",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                        dangXuatToolStripMenuItem_Click(new Button(), new EventArgs());
+                    }
+                    else
+                        MessageBox.Show("Khôi phục thất bại");
+                }
+            }
+        }
     }
 }

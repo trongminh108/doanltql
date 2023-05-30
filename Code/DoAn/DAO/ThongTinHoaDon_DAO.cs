@@ -21,6 +21,7 @@ namespace DAO
             ", idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -34,7 +35,6 @@ namespace DAO
                 ban.Price = int.Parse(dt.Rows[i]["gia"].ToString());
                 lst.Add(ban);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
 
@@ -56,6 +56,7 @@ namespace DAO
             ", idDoUong, idHoaDon);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return -1;
@@ -72,6 +73,7 @@ namespace DAO
             ", idDoUong, idHoaDon);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -114,6 +116,7 @@ namespace DAO
             ", idHD);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -128,7 +131,6 @@ namespace DAO
                 ban.Quantity = int.Parse(dt.Rows[i][3].ToString());
                 lst.Add(ban);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
     }

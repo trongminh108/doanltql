@@ -17,6 +17,7 @@ namespace DAO
             string sTruyVan = string.Format(@"select id from hoadon where idBan='{0}' AND tinhtrang=0", idBan);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return -1;
@@ -77,6 +78,7 @@ namespace DAO
                 fromDate, toDate);
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -92,7 +94,6 @@ namespace DAO
                 temp.Tongtien = int.Parse(dt.Rows[i][4].ToString());
                 lst.Add(temp);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
 
@@ -106,6 +107,7 @@ namespace DAO
             DateTime tg = DateTime.Now;
             SqlConnection conn = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, conn);
+            DataProvider.DongKetNoi(conn);
             if (dt.Rows.Count == 0)
             {
                 return null;
@@ -128,7 +130,6 @@ namespace DAO
                 temp.Tongtien = int.Parse(dt.Rows[i][4].ToString());
                 lst.Add(temp);
             }
-            DataProvider.DongKetNoi(conn);
             return lst;
         }
     }

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ban_BUS.cs" />
+    <Compile Include="CSDL_BUS.cs" />
     <Compile Include="DoUong_BUS.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="HoaDon_BUS.cs" />
